@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	error(int argc, void **argv)
+int	error(int argc, char **argv)
 {
 	if (argc == 1)
 	{
@@ -25,7 +25,7 @@ int	error(int argc, void **argv)
 	}
 }
 
-int	get_args(int argc, void **argv)
+int	get_args(int argc, char **argv)
 {
 	if (argc == 1)
 	{
@@ -35,7 +35,7 @@ int	get_args(int argc, void **argv)
 
 }
 
-int	main(int argc, void **argv)
+int	main(int argc, char **argv)
 {
 	t_list	*args;
 

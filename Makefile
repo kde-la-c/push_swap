@@ -10,4 +10,37 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME		= push_swap
+SRC			= push_swap.c
+OBJS		= $(SRC:%.c=%.o)
+INCLUDE		= push_swap.h
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
+RM			= rm
+RFLAGS		= -f
 
+LIBNAME		= libft.a
+LIBPATH		= libft/
+
+all:		$(NAME)
+
+$(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
+
+$(LIBNAME):
+			$(MAKE) -C $(LIBPATH) re
+			cp $(LIBPATH)$(LIBNAME) .
+			$(MAKE) -C $(LIBPATH) fclean
+
+clean:
+			$(RM) $(RFLAGS) $(OBJS)
+			@echo "\033[0;32m--- Objects cleaned successfully! ---\033[0m"
+
+fclean:		clean
+			$(RM) $(RFLAGS) $(NAME)
+			@echo "\033[0;32m--- Archive cleaned successfully! ---\033[0m"
+
+re:			fclean all
+
+.PHONY:		all clean fclean re
