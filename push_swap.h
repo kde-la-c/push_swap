@@ -20,4 +20,10 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
+typedef struct s_args
+{
+	int		argc;
+	char	**argv;
+}			t_args;
+
 #endif
