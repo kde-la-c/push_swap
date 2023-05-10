@@ -12,19 +12,6 @@
 
 #include "push_swap.h"
 
-int	error(int argc, char **argv)
-{
-	if (argc == 1)
-	{
-		printf("%s\n", argv[0]);
-		return (-1);
-	}
-	else if (argc == 2)
-	{
-
-	}
-}
-
 int	get_args(int argc, char **argv)
 {
 	if (argc == 1)
@@ -32,14 +19,13 @@ int	get_args(int argc, char **argv)
 		printf("%s\n", argv[0]);
 		return (-1);
 	}
-
+    return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list	*args;
-
-	if (error(argc, argv) == -1)
+    printf("%zu\n", ft_strlen("hola"));
+	if (get_args(argc, argv) == -1)
 		return (0);
 	return (0);
 }

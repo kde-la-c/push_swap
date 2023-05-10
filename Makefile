@@ -25,11 +25,11 @@ LIBPATH		= libft/
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
-			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 $(LIBNAME):
-			$(MAKE) -C $(LIBPATH) re
+			$(MAKE) -C $(LIBPATH)
 			cp $(LIBPATH)$(LIBNAME) .
 			$(MAKE) -C $(LIBPATH) fclean
 

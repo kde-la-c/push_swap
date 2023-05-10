@@ -18,11 +18,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdarg.h>
-
-typedef struct s_list
-{
-	int				nb;
-	struct s_list	*next;
-}					t_list;
+# include "libft/libft.h"
 
 #endif
