@@ -15,7 +15,7 @@ SRC			= push_swap.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -fsanitize=address -g3
 RM			= rm
 RFLAGS		= -f
 
