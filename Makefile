@@ -25,15 +25,15 @@ LIBPATH		= libft/
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
-			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 l:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			@$(CC) $(CFLAGS) -fsanitize=leak -g3 $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=leak -g3 $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 m:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			@$(CC) $(CFLAGS) -fsanitize=address -g3 $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=address -g3 $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 $(LIBNAME):

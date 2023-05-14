@@ -15,6 +15,7 @@
 t_list	*get_arg(char *arg)
 {
 	int		i;
+	int		j;
 	t_list	*ret;
 	char	**split;
 
@@ -22,14 +23,17 @@ t_list	*get_arg(char *arg)
 	split = ft_split(arg, ' ');
 	if (!split)
 		return (NULL);
-	ret = ft_lstnew(split[i++]);
 	while (split[i])
 	{
-		ret = ret->next;
-		ft_lstadd_back(&ret, ft_lstnew(split[i++]));
+		j = 0;
+		while (split[i] && split[i][j])
+			if (!ft_isdigit(split[i][j++]))
+				return (ft_dfree((void **)split), NULL);
+		if (!i)
+			ret = ft_lstnew(split[i++]);
+		else
+			ft_lstadd_back(&ret, ft_lstnew(split[i++]));
 	}
-	if (*split)
-		ft_dfree((void **)split, i - 1);
 	return (ret);
 }
 
@@ -62,14 +66,18 @@ int	main(int argc, char **argv)
 	args.argc = argc;
 	args.argv = argv;
 	i = read_args(args, &stka);
-	printf("ret :%i\n", i);
-	tmp = stka;
-	while (i != -1 && stka && stka->next)
+	if (stka)
 	{
-		printf("%s\n", (char *)stka->content);
-		stka = stka->next;
+		printf("test :%s\n", (char *)stka->content);
+		printf("ret :%i\n", i);
+		tmp = stka;
+		while (i != -1 && stka)
+		{
+			printf("%s\n", (char *)stka->content);
+			stka = stka->next;
+		}
+		stka = tmp;
+		ft_lstclear(&stka, free);
 	}
-	stka = tmp;
-	ft_lstclear(&stka, free);
 	return (0);
 }
