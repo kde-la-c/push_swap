@@ -12,42 +12,64 @@
 
 #include "push_swap.h"
 
-int	get_args(t_args args, t_list **stka)
+t_list	*get_arg(char *arg)
 {
+	int		i;
+	t_list	*ret;
 	char	**split;
-	t_list	*new;
 
+	i = 0;
+	split = ft_split(arg, ' ');
+	if (!split)
+		return (NULL);
+	ret = ft_lstnew(split[i++]);
+	while (split[i])
+	{
+		ret = ret->next;
+		ft_lstadd_back(&ret, ft_lstnew(split[i++]));
+	}
+	if (*split)
+		ft_dfree((void **)split, i - 1);
+	return (ret);
+}
+
+int	read_args(t_args args, t_list **stka)
+{
 	if (args.argc == 1)
+		return (printf("%s\n", args.argv[0]), -1);
+	else if (args.argc == 2 && ft_strlen(args.argv[1]))
 	{
-		printf("%s\n", args.argv[0]);
-		return (-1);
+		*stka = get_arg(args.argv[1]);
+		if (*stka)
+			return (1);
+		else
+			return (printf("Error\n"), -1);
 	}
-	else if (args.argc == 2)
-	{
-		split = ft_split(args.argv[1] + 1, ' ');
-		while (*split)
-		{
-			new = ft_lstnew(*(split++));
-			ft_lstadd_back(&(*stka), new);
-			ft_lstdelone(new, free);
-		}
-		return (1);
-	}
-	return (0);
+	// else if (args.argc > 2)
+	// 	return (get_args(args));
+	else
+		return (printf("Error\n"), -1);
 }
 
 int	main(int argc, char **argv)
 {
+	int		i;
 	t_args	args;
 	t_list	*stka;
+	t_list	*tmp;
 	// t_list	*stkb;
 
 	args.argc = argc;
 	args.argv = argv;
-	if (get_args(args, &stka) == -1)
+	i = read_args(args, &stka);
+	printf("ret :%i\n", i);
+	tmp = stka;
+	while (i != -1 && stka && stka->next)
 	{
-		printf("lstsize :%u\n", ft_lstsize(stka));
-		return (0);
+		printf("%s\n", (char *)stka->content);
+		stka = stka->next;
 	}
+	stka = tmp;
+	ft_lstclear(&stka, free);
 	return (0);
 }
