@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-t_list	*get_arg(char *arg)
+t_list	*get_arg(char *arg, t_list *ret)
 {
 	int		i;
 	int		j;
-	t_list	*ret;
+	void	*cont;
 	char	**split;
 
 	i = 0;
@@ -29,30 +29,38 @@ t_list	*get_arg(char *arg)
 		while (split[i] && split[i][j])
 			if (!ft_isdigit(split[i][j++]))
 				return (ft_dfree((void **)split), NULL);
-		if (!i)
-			ret = ft_lstnew(split[i++]);
+		cont = malloc(sizeof(int));
+		*(int *)cont = ft_atoi(split[i]);
+		if (!i++)
+			ret = ft_lstnew(cont);
 		else
-			ft_lstadd_back(&ret, ft_lstnew(split[i++]));
+			ft_lstadd_back(&ret, ft_lstnew(cont));
 	}
-	return (ret);
+	if (*split)
+		return (ft_dfree((void **)split), ret);
+	return (ft_dfree((void **)split), NULL);
 }
 
 int	read_args(t_args args, t_list **stka)
 {
+	t_list	*tmp;
+
 	if (args.argc == 1)
-		return (printf("%s\n", args.argv[0]), -1);
-	else if (args.argc == 2 && ft_strlen(args.argv[1]))
+		return (printf("%s\n", args.argv[0]), 0);
+	else if (args.argc > 1)
 	{
-		*stka = get_arg(args.argv[1]);
+		// if (args.argc > 2)
+		if (args.argc == 2/*  && ft_strlen(args.argv[1]) */)
+			tmp = get_arg(args.argv[1], *stka);
+		// printf("-->%i\n", *(int *)tmp->content);
+		*stka = tmp;
 		if (*stka)
 			return (1);
 		else
-			return (printf("Error\n"), -1);
+			return (printf("Error\n"), 0);
 	}
-	// else if (args.argc > 2)
-	// 	return (get_args(args));
 	else
-		return (printf("Error\n"), -1);
+		return (printf("Error\n"), 0);
 }
 
 int	main(int argc, char **argv)
@@ -66,18 +74,18 @@ int	main(int argc, char **argv)
 	args.argc = argc;
 	args.argv = argv;
 	i = read_args(args, &stka);
+	printf("ret :%i\n", i);
 	if (stka)
 	{
-		printf("test :%s\n", (char *)stka->content);
-		printf("ret :%i\n", i);
 		tmp = stka;
-		while (i != -1 && stka)
+		// printf("-->%i\n", *(int *)tmp->content);
+		while (i && stka)
 		{
-			printf("%s\n", (char *)stka->content);
+			printf("%i\n", *((int *)stka->content));
 			stka = stka->next;
 		}
 		stka = tmp;
-		ft_lstclear(&stka, free);
+		ft_lstclear(&tmp, free);
 	}
 	return (0);
 }
