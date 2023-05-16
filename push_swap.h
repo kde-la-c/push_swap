@@ -13,10 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <stdarg.h>
 # include "libft/libft.h"
 
@@ -25,5 +21,12 @@ typedef struct s_args
 	int		argc;
 	char	**argv;
 }			t_args;
+
+// free
+void	dlfree(t_list **lst, char **split);
+
+// argument handling
+t_list	*get_arg(char *arg, t_list *ret);
+int		read_args(t_args args, t_list **stka);
 
 #endif
