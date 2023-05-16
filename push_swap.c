@@ -31,9 +31,10 @@ t_list	*get_arg(char *arg, t_list *ret)
 		return (NULL);
 	while (split[i])
 	{
-		j = 0;
-		while (split[i] && split[i][j])
-			if (!(ft_isdigit(split[i][j++]) || !(!j && split[i][0] == '-')))
+		j = -1;
+		while (split[i] && split[i][++j])
+			if (!(ft_isdigit(split[i][j])
+				|| (!j && split[i][j] == '-' && split[i][j + 1])))
 				return (dlfree(&ret, split), NULL);
 		cont = malloc(sizeof(int));
 		*(int *)cont = ft_atoi(split[i++]);
