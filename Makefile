@@ -11,7 +11,9 @@
 # **************************************************************************** #
 
 NAME		= push_swap
-SRC			= push_swap.c
+SRC			= push_swap.c\
+			read_args.c\
+			swap.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc
@@ -29,11 +31,11 @@ $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 l:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=leak -g3 $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=leak -g $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 m:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=address -g3 $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=address -g $(OBJS) -o $(NAME) $(LIBNAME)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 $(LIBNAME):

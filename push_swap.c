@@ -12,31 +12,22 @@
 
 #include "push_swap.h"
 
-void	dlfree(t_list **lst, char **split)
-{
-	ft_dfree((void **)split);
-	ft_lstclear(&(*lst), free);
-}
-
-t_list	*get_arg(char *arg, t_list *ret)
+t_list	*fill_list(char *inp)
 {
 	int		i;
-	int		j;
+	t_list	*ret;
 	void	*cont;
 	char	**split;
 
 	i = 0;
-	split = ft_split(arg, ' ');
+	split = ft_split(inp, ' ');
 	if (!split)
 		return (NULL);
 	while (split[i])
 	{
-		j = -1;
-		while (split[i] && split[i][++j])
-			if (!(ft_isdigit(split[i][j])
-				|| (!j && split[i][j] == '-' && split[i][j + 1])))
-				return (dlfree(&ret, split), NULL);
 		cont = malloc(sizeof(int));
+		if (!cont)
+			return (dlfree(&ret, split), NULL);
 		*(int *)cont = ft_atoi(split[i++]);
 		ft_lstadd_back(&ret, ft_lstnew(cont));
 	}
@@ -45,27 +36,19 @@ t_list	*get_arg(char *arg, t_list *ret)
 	return (dlfree(NULL, split), NULL);
 }
 
-int	read_args(t_args args, t_list **stka)
+int	print_list(t_list *lst)
 {
-	int		i;
-	t_list	*tmp;
+	int	i;
 
-	i = 1;
-	tmp = NULL;
-	if (args.argc == 1)
-		return (printf("%s\n", args.argv[0]), 0);
-	else if (args.argc > 1)
+	if (!lst)
+		return (-1);
+	i = 0;
+	while (lst)
 	{
-		while (args.argv[i])
-			tmp = get_arg(args.argv[i++], tmp);
-		*stka = tmp;
-		if (*stka && ft_lstsize(*stka) > 1)
-			return (1);
-		else
-			return (printf("Error\n"), 0);
+		printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
+		lst = lst->next;
 	}
-	else
-		return (printf("Error\n"), 0);
+	return (i);
 }
 
 int	main(int argc, char **argv)
@@ -73,25 +56,30 @@ int	main(int argc, char **argv)
 	int		i;
 	t_args	args;
 	t_list	*stka;
-	t_list	*tmp;
-	// t_list	*stkb;
+	// t_list	*tmp;
+	t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
+	// stkb = fill_list("165 76");
 	i = read_args(args, &stka);
 	printf("ret :%i\n", i);
 	printf("len :%i\n", ft_lstsize(stka));
 	if (stka)
 	{
-		tmp = stka;
-		while (i && stka)
-		{
-			printf("%i\n", *((int *)stka->content));
-			stka = stka->next;
-		}
-		stka = tmp;
-		ft_lstclear(&tmp, free);
+		// tmp = stka;
+		// print_list(tmp);
+		// stka = tmp;
+		// ft_lstclear(&tmp, free);
+		print_list(stka);
+		print_list(stkb);
+		write(1, "hola\n", 5);
+		dswap(&stka, &stkb);
+		printf("-----\n");
+		print_list(stka);
+		print_list(stkb);
+		dlfree(&stka, NULL);
 	}
 	return (0);
 }

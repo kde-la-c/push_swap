@@ -16,17 +16,23 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
+// arguments
 typedef struct s_args
 {
 	int		argc;
 	char	**argv;
 }			t_args;
 
-// free
-void	dlfree(t_list **lst, char **split);
+// testing
+int	print_list(t_list *lst);
 
 // argument handling
+void	dlfree(t_list **lst, char **split);
 t_list	*get_arg(char *arg, t_list *ret);
 int		read_args(t_args args, t_list **stka);
+
+// operations
+void	swap(t_list **stk);
+void	dswap(t_list **stka, t_list **stkb);
 
 #endif
