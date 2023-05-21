@@ -16,7 +16,7 @@ void	dlfree(t_list **lst, char **split)
 {
 	if (split)
 		ft_dfree((void **)split);
-	if (*lst)
+	if (lst && *lst)
 		ft_lstclear(&(*lst), free);
 }
 
@@ -61,8 +61,7 @@ int	read_args(t_args args, t_list **stka)
 	else if (args.argc > 1)
 	{
 		while (args.argv[i])
-			tmp = get_arg(args.argv[i++], tmp);
-		*stka = tmp;
+			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
 		if (*stka && ft_lstsize(*stka) > 1)
 			return (1);
 		else

@@ -56,13 +56,12 @@ int	main(int argc, char **argv)
 	int		i;
 	t_args	args;
 	t_list	*stka;
-	// t_list	*tmp;
 	t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	// stkb = fill_list("165 76");
+	stkb = fill_list("165 76");
 	i = read_args(args, &stka);
 	printf("ret :%i\n", i);
 	printf("len :%i\n", ft_lstsize(stka));
@@ -73,13 +72,15 @@ int	main(int argc, char **argv)
 		// stka = tmp;
 		// ft_lstclear(&tmp, free);
 		print_list(stka);
+		printf("\n");
 		print_list(stkb);
-		write(1, "hola\n", 5);
 		dswap(&stka, &stkb);
 		printf("-----\n");
 		print_list(stka);
+		printf("\n");
 		print_list(stkb);
 		dlfree(&stka, NULL);
+		dlfree(&stkb, NULL);
 	}
 	return (0);
 }

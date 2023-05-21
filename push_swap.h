@@ -33,6 +33,14 @@ int		read_args(t_args args, t_list **stka);
 
 // operations
 void	swap(t_list **stk);
+void	push(t_list **stksrc, t_list **stkdst);
+void	rotate(t_list **stk);
+void	reverse(t_list **stk);
+
+// double operations
 void	dswap(t_list **stka, t_list **stkb);
+void	drotate(t_list **stka, t_list **stkb);
+void	dreverse(t_list **stka, t_list **stkb);
+
 
 #endif
