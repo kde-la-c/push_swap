@@ -15,7 +15,7 @@
 t_list	*fill_list(char *inp)
 {
 	int		i;
-	t_list	*ret;
+	t_list	*ret = NULL;
 	void	*cont;
 	char	**split;
 
@@ -43,11 +43,12 @@ int	print_list(t_list *lst)
 	if (!lst)
 		return (-1);
 	i = 0;
-	while (lst)
+	while (lst && lst->content)
 	{
 		printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
 		lst = lst->next;
 	}
+	// write(1, ">:cc\n", 5);
 	return (i);
 }
 
@@ -61,7 +62,7 @@ int	main(int argc, char **argv)
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	stkb = fill_list("165 76");
+	stkb = fill_list("1 22 333 4444 55555");
 	i = read_args(args, &stka);
 	printf("ret :%i\n", i);
 	printf("len :%i\n", ft_lstsize(stka));
@@ -71,14 +72,15 @@ int	main(int argc, char **argv)
 		// print_list(tmp);
 		// stka = tmp;
 		// ft_lstclear(&tmp, free);
-		print_list(stka);
+		// print_list(stka);
 		printf("\n");
-		print_list(stkb);
-		dswap(&stka, &stkb);
+		// print_list(stkb);
+		rotate(&stkb);
+		// push(&stkb, &stka);
 		printf("-----\n");
-		print_list(stka);
+		// print_list(stka);
 		printf("\n");
-		print_list(stkb);
+		// print_list(stkb);
 		dlfree(&stka, NULL);
 		dlfree(&stkb, NULL);
 	}

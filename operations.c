@@ -34,22 +34,29 @@ void	swap(t_list **stk)
 
 void	push(t_list **stksrc, t_list **stkdst)
 {
-	ft_lstadd_front(&(*stkdst), ft_lstnew((*stksrc)->content));
+	void	*pt;
+
+	pt = (int *)malloc(sizeof(int));
+	*(int *)pt = *((int *)(*stksrc)->content);
+	ft_lstadd_front(&(*stkdst), ft_lstnew(pt));
 	ft_lstdelone(*stksrc, free);
 	*stksrc = (*stksrc)->next;
 }
 
 void	rotate(t_list **stk)
 {
-	void	*tmp;
+	int		i;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
-	tmp = (*stk)->content;
-	while (*stk && (*stk)->next)
-	{
-		(*stk)->content = (*stk)->next->content;
-		*stk = (*stk)->next;
-	}
-	(*stk)->next = tmp;
+	i = ft_lstsize(*stk) - 1;
+	tmp1 = *stk;
+	tmp2 = ft_lstlast(*stk);
+	while (i > 0)
+		tmp1 = tmp1->next;
+	tmp1->next = NULL;
+	ft_lstadd_back(&(*stk), tmp2);
+	print_list(*stk);
 }
 
 void	reverse(t_list **stk)
@@ -58,5 +65,5 @@ void	reverse(t_list **stk)
 
 	tmp = (ft_lstlast(*stk)->content);
 	ft_lstdelone(ft_lstlast(*stk), free);
-	ft_lstadd_front(&(*stk), ft_lstnew(tmp));
+	ft_lstadd_back(&(*stk), ft_lstnew(tmp));
 }
