@@ -63,25 +63,25 @@ int	main(int argc, char **argv)
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	stkb = fill_list("1 22 333 4444 55555");
+	// stkb = fill_list("1 22 333 4444 55555");
 	i = read_args(args, &stka);
 	printf("ret :%i\n", i);
 	printf("len :%i\n", ft_lstsize(stka));
 	if (stka)
 	{
-		// tmp = stka;
-		// print_list(tmp);
-		// stka = tmp;
-		// ft_lstclear(&tmp, free);
 		print_list(stka);
-		printf("\n");
-		print_list(stkb);
-		rotate(&stkb);
-		// push(&stkb, &stka);
+		swap(&stka);
+		push(&stka, &stkb);
+		push(&stka, &stkb);
+		push(&stka, &stkb);
+		drotate(&stka, &stkb);
+		dreverse(&stka, &stkb);
+		swap(&stka);
+		push(&stkb, &stka);
+		push(&stkb, &stka);
+		push(&stkb, &stka);
 		printf("-----\n");
 		print_list(stka);
-		printf("\n");
-		print_list(stkb);
 		dlfree(&stka, NULL);
 		dlfree(&stkb, NULL);
 	}

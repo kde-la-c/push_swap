@@ -58,9 +58,10 @@ void	rotate(t_list **stk)
 
 void	reverse(t_list **stk)
 {
-	void	*tmp;
+	t_list	*tmp;
 
-	tmp = (ft_lstlast(*stk)->content);
-	ft_lstdelone(ft_lstlast(*stk), free);
-	ft_lstadd_back(&(*stk), ft_lstnew(tmp));
+	tmp = *stk;
+	*stk = (*stk)->next;
+	tmp->next = NULL;
+	ft_lstadd_back(&(*stk), tmp);
 }
