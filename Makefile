@@ -14,7 +14,8 @@ NAME		= push_swap
 SRC			= push_swap.c\
 			read_args.c\
 			operations.c\
-			doperations.c
+			doperations.c\
+			sort.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc

@@ -16,15 +16,23 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-// arguments
+// argument structure
 typedef struct s_args
 {
 	int		argc;
 	char	**argv;
 }			t_args;
 
+// information structure
+typedef struct s_info
+{
+	int		nbargs;
+	int		bigger;
+	int		smaller;
+}			t_info;
+
 // testing
-int	print_list(t_list *lst);
+int		print_list(t_list *lst);
 
 // argument handling
 void	dlfree(t_list **lst, char **split);
@@ -42,5 +50,8 @@ void	dswap(t_list **stka, t_list **stkb);
 void	drotate(t_list **stka, t_list **stkb);
 void	dreverse(t_list **stka, t_list **stkb);
 
+// sorting
+void	sort_3(t_info info, t_list **stk);
+void	sort(t_info info, t_list **stka);
 
 #endif

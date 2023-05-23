@@ -12,6 +12,28 @@
 
 #include "push_swap.h"
 
+t_info	fill_info(t_list *stka)
+{
+	int		i;
+	int		j;
+	t_info	ret;
+
+	ret.nbargs = ft_lstsize(stka);
+	i = -2147483648;
+	j = 2147483647;
+	while (stka)
+	{
+		if (i < *(int *)stka->content)
+			i = *(int *)stka->content;
+		if (j > *(int *)stka->content)
+			j = *(int *)stka->content;
+		stka = stka->next;
+	}
+	ret.bigger = i;
+	ret.smaller = j;
+	return (ret);
+}
+
 t_list	*fill_list(char *inp)
 {
 	int		i;
@@ -55,35 +77,27 @@ int	print_list(t_list *lst)
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	t_args	args;
+	t_info	info;
 	t_list	*stka;
-	t_list	*stkb = NULL;
+	// t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
 	// stkb = fill_list("1 22 333 4444 55555");
-	i = read_args(args, &stka);
-	printf("ret :%i\n", i);
-	printf("len :%i\n", ft_lstsize(stka));
+	read_args(args, &stka);
 	if (stka)
 	{
+		info = fill_info(stka);
+		sort(info, &stka);
+		// printf("big :%i\n", info.bigger);
+		// printf("smol :%i\n", info.smaller);
 		print_list(stka);
-		swap(&stka);
-		push(&stka, &stkb);
-		push(&stka, &stkb);
-		push(&stka, &stkb);
-		drotate(&stka, &stkb);
-		dreverse(&stka, &stkb);
-		swap(&stka);
-		push(&stkb, &stka);
-		push(&stkb, &stka);
-		push(&stkb, &stka);
-		printf("-----\n");
-		print_list(stka);
+		// printf("-----\n");
+		// print_list(stka);
 		dlfree(&stka, NULL);
-		dlfree(&stkb, NULL);
+		// dlfree(&stkb, NULL);
 	}
 	return (0);
 }
