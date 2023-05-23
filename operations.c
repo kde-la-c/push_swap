@@ -45,18 +45,15 @@ void	push(t_list **stksrc, t_list **stkdst)
 
 void	rotate(t_list **stk)
 {
-	int		i;
 	t_list	*tmp1;
 	t_list	*tmp2;
 
-	i = ft_lstsize(*stk) - 1;
 	tmp1 = *stk;
-	tmp2 = ft_lstlast(*stk);
-	while (i > 0)
+	while (tmp1 && tmp1->next && tmp1->next->next)
 		tmp1 = tmp1->next;
+	tmp2 = tmp1->next;
 	tmp1->next = NULL;
-	ft_lstadd_back(&(*stk), tmp2);
-	print_list(*stk);
+	ft_lstadd_front(&(*stk), tmp2);
 }
 
 void	reverse(t_list **stk)

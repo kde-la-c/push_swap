@@ -45,6 +45,7 @@ int	print_list(t_list *lst)
 	i = 0;
 	while (lst && lst->content)
 	{
+		// sleep(1);
 		printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
 		lst = lst->next;
 	}
@@ -72,15 +73,15 @@ int	main(int argc, char **argv)
 		// print_list(tmp);
 		// stka = tmp;
 		// ft_lstclear(&tmp, free);
-		// print_list(stka);
+		print_list(stka);
 		printf("\n");
-		// print_list(stkb);
+		print_list(stkb);
 		rotate(&stkb);
 		// push(&stkb, &stka);
 		printf("-----\n");
-		// print_list(stka);
+		print_list(stka);
 		printf("\n");
-		// print_list(stkb);
+		print_list(stkb);
 		dlfree(&stka, NULL);
 		dlfree(&stkb, NULL);
 	}
