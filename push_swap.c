@@ -58,10 +58,11 @@ t_list	*fill_list(char *inp)
 	return (dlfree(NULL, split), NULL);
 }
 
-int	print_list(t_list *lst)
+int	print_list(t_list *lst, char *str)
 {
 	int	i;
 
+	printf("%s :\n", str);
 	if (!lst)
 		return (-1);
 	i = 0;
@@ -71,6 +72,7 @@ int	print_list(t_list *lst)
 		printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
 		lst = lst->next;
 	}
+	printf("%i: \033[0;31mNULL\033[0m\n", i);
 	// write(1, ">:cc\n", 5);
 	return (i);
 }
@@ -78,26 +80,30 @@ int	print_list(t_list *lst)
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	t_info	info;
+	// t_info	info;
 	t_list	*stka;
-	// t_list	*stkb = NULL;
+	t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	// stkb = fill_list("1 22 333 4444 55555");
+	stkb = fill_list("1 22 333 4444 55555");
 	read_args(args, &stka);
 	if (stka)
 	{
-		info = fill_info(stka);
-		sort(info, &stka);
-		// printf("big :%i\n", info.bigger);
-		// printf("smol :%i\n", info.smaller);
-		print_list(stka);
-		// printf("-----\n");
-		// print_list(stka);
+		print_list(stka, "a");
+		rotate(&stka);
+		rotate(&stka);
+		rotate(&stka);
+		print_list(stka, "a");
+		push(&stka, &stkb);
+		print_list(stkb, "b");
+		print_list(stka, "a");
+		rotate(&stka);
+		rotate(&stka);
+		print_list(stka, "a");
 		dlfree(&stka, NULL);
-		// dlfree(&stkb, NULL);
+		dlfree(&stkb, NULL);
 	}
 	return (0);
 }

@@ -12,13 +12,33 @@
 
 #include "push_swap.h"
 
-void	sort_3(t_info info, t_list **stk)
+int	check_order(t_list *stk)
 {
-	
+	while (stk->next && *(int *)stk->content < *(int *)stk->next->content)
+		stk = stk->next;
+	if (stk->next)
+		return (0);
+	return (1);
 }
 
-void	sort(t_info info, t_list **stka)
+void	sort(t_info info, t_list **stk)
 {
-	if (info.nbargs <= 3)
-		sort_3(info, &(*stka));
+	int		i;
+	t_list	*stka;
+	t_list	*stkb;
+	info = info;
+
+	print_list(*stk, "stk");
+	i = 0;
+	stka = *stk;
+	while (stka)
+	{
+		if (*(int *)stka->content % 10 == i)
+			push(&stka, &stkb);
+		else
+			rotate(&stka);
+		stka = stka->next;
+		i++;
+	}
+	print_list(*stk, "stk");
 }

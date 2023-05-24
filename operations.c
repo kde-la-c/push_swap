@@ -12,10 +12,6 @@
 
 #include "push_swap.h"
 
-/****************************************\
-*segfault from operations || doperations?*
-\****************************************/
-
 void	swap(t_list **stk)
 {
 	void	*pt;
@@ -34,13 +30,12 @@ void	swap(t_list **stk)
 
 void	push(t_list **stksrc, t_list **stkdst)
 {
-	void	*pt;
+	t_list	*tmp;
 
-	pt = (int *)malloc(sizeof(int));
-	*(int *)pt = *((int *)(*stksrc)->content);
-	ft_lstadd_front(&(*stkdst), ft_lstnew(pt));
-	ft_lstdelone(*stksrc, free);
+	tmp = *stksrc;
 	*stksrc = (*stksrc)->next;
+	tmp->next = NULL;
+	ft_lstadd_front(&(*stkdst), tmp);
 }
 
 void	rotate(t_list **stk)

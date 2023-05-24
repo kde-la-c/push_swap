@@ -32,7 +32,7 @@ typedef struct s_info
 }			t_info;
 
 // testing
-int		print_list(t_list *lst);
+int		print_list(t_list *lst, char *str);
 
 // argument handling
 void	dlfree(t_list **lst, char **split);
