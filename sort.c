@@ -21,24 +21,74 @@ int	check_order(t_list *stk)
 	return (1);
 }
 
-void	sort(t_info info, t_list **stk)
+// void	sort(t_info info, t_list **stka, t_list **stkb)
+void	sort(t_info info, t_list **stk1, int r)
 {
 	int		i;
-	t_list	*stka;
-	t_list	*stkb;
+	int		j;
+	int		st;
+	t_list	*stk2 = NULL;
 	info = info;
+	r = r;
 
-	print_list(*stk, "stk");
-	i = 0;
-	stka = *stk;
-	while (stka)
+	i = 9;
+	j = 1;
+	st = *(int *)(*stk1)->content;
+	while ((*stk1)->content && j)
 	{
-		if (*(int *)stka->content % 10 == i)
-			push(&stka, &stkb);
+		if (*(int *)(*stk1)->content % 10 == i || !(*stk1)->next)
+			push(&(*stk1), &stk2);
 		else
-			rotate(&stka);
-		stka = stka->next;
-		i++;
+			rotate(&(*stk1));
+		if (*stk1 && (*(int *)(*stk1)->content == st || j == ft_lstsize(*stk1)))
+		{
+			i--;
+			j = 1;
+		}
+		else
+			j++;
+	write(1, "CACA:(\n", 7);
 	}
-	print_list(*stk, "stk");
+	// printf("%i\n", );
+	while (stk2)
+	{
+		reverse(&stk2);
+		push(&stk2, &(*stk1));
+	}
 }
+
+/* void	sort(t_info info, t_list **stka, t_list **stkb)
+{
+	int		i;
+	int		j;
+	int		st;
+	int		nba;
+
+	i = 9;
+	j = 1;
+	st = *(int *)(*stka)->content;
+	nba = info.nbargs;
+	while (*stka && j)
+	{
+		if (*(int *)(*stka)->content % 10 == i || !(*stka)->next)
+		{
+			push(&(*stka), &(*stkb));
+			nba--;
+		}
+		else
+			rotate(&(*stka));
+		if (*stka && (*(int *)(*stka)->content == st || j == nba))
+		{
+			i--;
+			j = 1;
+		}
+		else
+			j++;
+	}
+	print_list(*stkb, "stkb");
+	while (*stkb)
+	{
+		rotate(&(*stkb));
+		push(&(*stkb), &(*stka));
+	}
+} */

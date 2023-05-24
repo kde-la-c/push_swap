@@ -43,6 +43,8 @@ void	rotate(t_list **stk)
 	t_list	*tmp1;
 	t_list	*tmp2;
 
+	if (!(*stk && (*stk)->next))
+		return ;
 	tmp1 = *stk;
 	while (tmp1 && tmp1->next && tmp1->next->next)
 		tmp1 = tmp1->next;

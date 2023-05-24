@@ -80,30 +80,24 @@ int	print_list(t_list *lst, char *str)
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	// t_info	info;
+	t_info	info;
 	t_list	*stka;
-	t_list	*stkb = NULL;
+	// t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	stkb = fill_list("1 22 333 4444 55555");
+	// stkb = fill_list("1 22 333 4444 55555");
 	read_args(args, &stka);
+	info = fill_info(stka);
 	if (stka)
 	{
 		print_list(stka, "a");
-		rotate(&stka);
-		rotate(&stka);
-		rotate(&stka);
-		print_list(stka, "a");
-		push(&stka, &stkb);
-		print_list(stkb, "b");
-		print_list(stka, "a");
-		rotate(&stka);
-		rotate(&stka);
+		// sort(info, &stka, &stkb);
+		sort(info, &stka, 1);
 		print_list(stka, "a");
 		dlfree(&stka, NULL);
-		dlfree(&stkb, NULL);
+		// dlfree(&stkb, NULL);
 	}
 	return (0);
 }

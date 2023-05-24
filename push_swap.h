@@ -51,7 +51,8 @@ void	drotate(t_list **stka, t_list **stkb);
 void	dreverse(t_list **stka, t_list **stkb);
 
 // sorting
-void	sort_3(t_info info, t_list **stk);
-void	sort(t_info info, t_list **stka);
+// void	sort_3(t_info info, t_list **stk);
+// void	sort(t_info info, t_list **stka, t_list **stkb);
+void	sort(t_info info, t_list **stka, int r);
 
 #endif
