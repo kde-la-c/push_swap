@@ -19,6 +19,7 @@ t_info	fill_info(t_list *stka)
 	t_info	ret;
 
 	ret.nbargs = ft_lstsize(stka);
+	ret.nbargstmp = ret.nbargs;
 	i = -2147483648;
 	j = 2147483647;
 	while (stka)

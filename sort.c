@@ -26,35 +26,28 @@ void	sort(t_info info, t_list **stk1, int r)
 {
 	int		i;
 	int		j;
-	int		st;
-	t_list	*stk2 = NULL;
+	t_list	*stk2;
+
 	info = info;
-	r = r;
 
 	i = 9;
 	j = 1;
-	st = *(int *)(*stk1)->content;
-	while ((*stk1)->content && j)
+	while (*stk1 && j)
 	{
-		if (*(int *)(*stk1)->content % 10 == i || !(*stk1)->next)
-			push(&(*stk1), &stk2);
-		else
-			rotate(&(*stk1));
-		if (*stk1 && (*(int *)(*stk1)->content == st || j == ft_lstsize(*stk1)))
+		if (*(int *)(*stk1)->content % (r * 10) / r == i || !(*stk1)->next)
 		{
-			i--;
-			j = 1;
+			push(&(*stk1), &stk2);
+			info.nbargstmp--;
 		}
 		else
-			j++;
-	write(1, "CACA:(\n", 7);
+			rotate(&(*stk1));
+		if (j <= info.nbargstmp)
+		{
+			i--;
+		}
+		j++;
 	}
-	// printf("%i\n", );
-	while (stk2)
-	{
-		reverse(&stk2);
-		push(&stk2, &(*stk1));
-	}
+	print_list(stk2, "stk2");
 }
 
 /* void	sort(t_info info, t_list **stka, t_list **stkb)

@@ -27,6 +27,7 @@ typedef struct s_args
 typedef struct s_info
 {
 	int		nbargs;
+	int		nbargstmp;
 	int		bigger;
 	int		smaller;
 }			t_info;
