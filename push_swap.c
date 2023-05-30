@@ -83,7 +83,7 @@ int	main(int argc, char **argv)
 	t_args	args;
 	t_info	info;
 	t_list	*stka;
-	// t_list	*stkb = NULL;
+	t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
@@ -94,8 +94,8 @@ int	main(int argc, char **argv)
 	if (stka)
 	{
 		print_list(stka, "a");
-		// sort(info, &stka, &stkb);
-		sort(info, &stka, 1);
+		sort(info, &stka, &stkb);
+		// sort(info, &stka, 1);
 		print_list(stka, "a");
 		dlfree(&stka, NULL);
 		// dlfree(&stkb, NULL);
