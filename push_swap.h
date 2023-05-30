@@ -30,6 +30,7 @@ typedef struct s_info
 	int		nbargstmp;
 	int		bigger;
 	int		smaller;
+	int		maxlen;
 }			t_info;
 
 // testing
@@ -39,6 +40,7 @@ int		print_list(t_list *lst, char *str);
 void	dlfree(t_list **lst, char **split);
 t_list	*get_arg(char *arg, t_list *ret);
 int		read_args(t_args args, t_list **stka);
+t_info	fill_info(t_list *stk);
 
 // operations
 void	swap(t_list **stk);

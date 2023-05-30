@@ -12,29 +12,6 @@
 
 #include "push_swap.h"
 
-t_info	fill_info(t_list *stka)
-{
-	int		i;
-	int		j;
-	t_info	ret;
-
-	ret.nbargs = ft_lstsize(stka);
-	ret.nbargstmp = ret.nbargs;
-	i = -2147483648;
-	j = 2147483647;
-	while (stka)
-	{
-		if (i < *(int *)stka->content)
-			i = *(int *)stka->content;
-		if (j > *(int *)stka->content)
-			j = *(int *)stka->content;
-		stka = stka->next;
-	}
-	ret.bigger = i;
-	ret.smaller = j;
-	return (ret);
-}
-
 t_list	*fill_list(char *inp)
 {
 	int		i;
@@ -91,12 +68,13 @@ int	main(int argc, char **argv)
 	// stkb = fill_list("1 22 333 4444 55555");
 	read_args(args, &stka);
 	info = fill_info(stka);
+	printf("maxlen :%i\n", info.maxlen);
 	if (stka)
 	{
 		print_list(stka, "a");
 		sort(info, &stka, &stkb);
 		// sort(info, &stka, 1);
-		print_list(stka, "a");
+		// print_list(stka, "a");
 		dlfree(&stka, NULL);
 		// dlfree(&stkb, NULL);
 	}
