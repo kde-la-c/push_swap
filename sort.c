@@ -20,6 +20,25 @@ int	check_order(t_list *stk)
 		return (0);
 	return (1);
 }
+//TODO new sort functions
+/* void	sort(t_info info, t_list **stka, t_list **stkb)
+{
+	int	temp;
+	int	unit;
+	int	i;
+
+	i = 0;
+	unit = 9;
+	temp = *(int *)(*stka)->content;
+	while (i < info.maxlen)
+	{
+		while ()
+		{
+
+		}
+		i++;
+	}
+} */
 
 void	sort(t_info info, t_list **stka, t_list **stkb)
 {

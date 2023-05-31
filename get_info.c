@@ -14,8 +14,9 @@
 
 void	get_extremes(t_info *info, t_list *stk)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*str;
 
 	i = -2147483648;
 	j = 2147483647;
@@ -29,16 +30,12 @@ void	get_extremes(t_info *info, t_list *stk)
 	}
 	(*info).bigger = i;
 	(*info).smaller = j;
-	/* while (stk)
-	{
-		j = ft_strlen(ft_itoa(*(int *)stk->content)) - *(int *)stk->content < 1;
-		if (j > i)
-			i = j;
-		stk = stk->next;
-	} */
-	//TODO encontrar la max len sin el '-'
-	i = (*info).bigger < 0;
-	(*info).maxlen = ft_strlen(ft_itoa((*info).bigger)) - i;
+	if (j < 0 && (j * -1) > i)
+		str = ft_itoa(j * -1);
+	else
+		str = ft_itoa(i);
+	(*info).maxlen = ft_strlen(str);
+	free(str);
 }
 
 t_info	fill_info(t_list *stk)
