@@ -12,28 +12,6 @@
 
 #include "push_swap.h"
 
-t_info	fill_info(t_list *stka)
-{
-	int		i;
-	int		j;
-	t_info	ret;
-
-	ret.nbargs = ft_lstsize(stka);
-	i = -2147483648;
-	j = 2147483647;
-	while (stka)
-	{
-		if (i < *(int *)stka->content)
-			i = *(int *)stka->content;
-		if (j > *(int *)stka->content)
-			j = *(int *)stka->content;
-		stka = stka->next;
-	}
-	ret.bigger = i;
-	ret.smaller = j;
-	return (ret);
-}
-
 t_list	*fill_list(char *inp)
 {
 	int		i;
@@ -80,30 +58,25 @@ int	print_list(t_list *lst, char *str)
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	// t_info	info;
+	t_info	info;
 	t_list	*stka;
 	t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	stkb = fill_list("1 22 333 4444 55555");
+	// stkb = fill_list("1 22 333 4444 55555");
 	read_args(args, &stka);
+	info = fill_info(stka);
+	printf("maxlen :%i\n", info.maxlen);
 	if (stka)
 	{
 		print_list(stka, "a");
-		rotate(&stka);
-		rotate(&stka);
-		rotate(&stka);
-		print_list(stka, "a");
-		push(&stka, &stkb);
-		print_list(stkb, "b");
-		print_list(stka, "a");
-		rotate(&stka);
-		rotate(&stka);
-		print_list(stka, "a");
+		sort(info, &stka, &stkb);
+		// sort(info, &stka, 1);
+		// print_list(stka, "a");
 		dlfree(&stka, NULL);
-		dlfree(&stkb, NULL);
+		// dlfree(&stkb, NULL);
 	}
 	return (0);
 }

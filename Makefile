@@ -15,7 +15,8 @@ SRC			= push_swap.c\
 			read_args.c\
 			operations.c\
 			doperations.c\
-			sort.c
+			sort.c\
+			get_info.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc
