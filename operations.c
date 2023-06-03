@@ -26,6 +26,7 @@ void	swap(t_list **stk)
 	}
 	else
 		return ;
+	printf("swap\n");
 }
 
 void	push(t_list **stksrc, t_list **stkdst)
@@ -36,6 +37,7 @@ void	push(t_list **stksrc, t_list **stkdst)
 	*stksrc = (*stksrc)->next;
 	tmp->next = NULL;
 	ft_lstadd_front(&(*stkdst), tmp);
+	printf("push\n");
 }
 
 void	rotate(t_list **stk)
@@ -51,6 +53,7 @@ void	rotate(t_list **stk)
 	tmp2 = tmp1->next;
 	tmp1->next = NULL;
 	ft_lstadd_front(&(*stk), tmp2);
+	printf("rotate\n");
 }
 
 void	reverse(t_list **stk)
@@ -61,4 +64,5 @@ void	reverse(t_list **stk)
 	*stk = (*stk)->next;
 	tmp->next = NULL;
 	ft_lstadd_back(&(*stk), tmp);
+	printf("reverse\n");
 }

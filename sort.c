@@ -20,27 +20,51 @@ int	check_order(t_list *stk)
 		return (0);
 	return (1);
 }
-//TODO new sort functions
-/* void	sort(t_info info, t_list **stka, t_list **stkb)
+
+int	get_maxunit(t_list *stk, int pos)
 {
-	int	temp;
-	int	unit;
+	int	ret;
+
+	ret = -9;
+	while (stk)
+	{
+		if (*(int *)stk->content % (pos * 10) / pos > ret)
+			ret = *(int *)stk->content % (pos * 10) / pos;
+		stk = stk->next;
+	}
+	printf("maxunit :%i\n", ret);
+	return (ret);
+}
+
+/* void	sort_pos(t_info info, t_list **stk1, t_list **stk2, int pos)
+{
 	int	i;
+	int unit;
+	int	size;
 
 	i = 0;
-	unit = 9;
-	temp = *(int *)(*stka)->content;
-	while (i < info.maxlen)
+	unit = get_maxunit(*stk1, pos);
+	size = ft_lstsize(*stk1);
+	while (i < size)
 	{
-		while ()
-		{
-
-		}
-		i++;
+		if ()
 	}
+}
+
+//TODO new sort functions
+void	sort(t_info info, t_list **stka, t_list **stkb)
+{
+	// int	temp;
+	// int	unit;
+	// int	i;
+
+	// i = 0;
+	// unit = 9;
+	// temp = *(int *)(*stka)->content;
+	sort_pos(info, &(*stka), &(*stkb), 1);
 } */
 
-void	sort(t_info info, t_list **stka, t_list **stkb)
+/* void	sort(t_info info, t_list **stka, t_list **stkb)
 {
 	int		i;
 	int		j;
@@ -53,7 +77,7 @@ void	sort(t_info info, t_list **stka, t_list **stkb)
 	nba = info.nbargs;
 	while (*stka && j)
 	{
-		if (*(int *)(*stka)->content % 10 == i || !(*stka)->next)
+		if ((*(int *)(*stka)->content % 10 == i || *(int *)(*stka)->content % 10 == -i) || !(*stka)->next)
 		{
 			push(&(*stka), &(*stkb));
 			nba--;
@@ -69,25 +93,25 @@ void	sort(t_info info, t_list **stka, t_list **stkb)
 			j++;
 	}
 	print_list(*stkb, "stkb");
-	i = 9;
-	j = 1;
-	st = *(int *)(*stkb)->content;
-	nba = info.nbargs;
-	while (*stkb && j)
-	{
-		if (*(int *)(*stkb)->content % 100 / 10 == i || !(*stkb)->next)
-		{
-			push(&(*stkb), &(*stka));
-			nba--;
-		}
-		else
-			rotate(&(*stkb));
-		if (*stkb && (*(int *)(*stkb)->content == st || j == nba))
-		{
-			i--;
-			j = 1;
-		}
-		else
-			j++;
-	}
-}
+	// i = 9;
+	// j = 1;
+	// st = *(int *)(*stkb)->content;
+	// nba = info.nbargs;
+	// while (*stkb && j)
+	// {
+	// 	if (*(int *)(*stkb)->content % 100 / 10 == i || !(*stkb)->next)
+	// 	{
+	// 		push(&(*stkb), &(*stka));
+	// 		nba--;
+	// 	}
+	// 	else
+	// 		rotate(&(*stkb));
+	// 	if (*stkb && (*(int *)(*stkb)->content == st || j == nba))
+	// 	{
+	// 		i--;
+	// 		j = 1;
+	// 	}
+	// 	else
+	// 		j++;
+	// }
+} */
