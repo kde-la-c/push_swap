@@ -16,7 +16,7 @@ SRC			= push_swap.c\
 			operations.c\
 			doperations.c\
 			sort.c\
-			sort_6.c\
+			sort_5.c\
 			get_info.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h

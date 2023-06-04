@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_6.c                                           :+:      :+:    :+:   */
+/*   sort_5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kde-la-c <kde-la-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,6 +23,11 @@ void	sort_3(t_list **stk)
 	t_info	info;
 
 	info = fill_info(*stk);
+	if (info.nbargs == 2)
+	{
+		sort_2(&(*stk));
+		return ;
+	}
 	if (*(int *)(*stk)->content == info.bigger)
 		reverse(&(*stk));
 	if (!check_order(*stk) &&
@@ -34,36 +39,25 @@ void	sort_3(t_list **stk)
 		swap(&(*stk));
 }
 
-void	sort_6(t_info info, t_list **stka)
+void	sort_5(t_info info, t_list **stka)
 {
 	t_list	*stkb;
 
 	stkb = NULL;
 	while (info.nbargs > 3)
-	{
-		push(&(*stka), &stkb);
-		info.nbargs--;
-	}
+		if (*(int *)(*stka)->content == info.smaller
+			|| *(int *)(*stka)->content == info.bigger)
+		{
+			push(&(*stka), &stkb);
+			info.nbargs--;
+		}
+	else
+		rotate(&(*stka));
 	sort_3(&(*stka));
-	if (ft_lstsize(stkb) == 2)
-		sort_2(&stkb);
-	else if (ft_lstsize(stkb) == 3)
-		sort_3(&stkb);
 	while (stkb)
 	{
-		if (*(int *)stkb->content < *(int *)(*stka)->content
-			|| (*(int *)stkb->content > *(int *)(*stka)->content
-			&& *(int *)ft_lstlast(*stka)->content == info.bigger))
-		{
-			push(&stkb, &(*stka));
-			info = fill_info(*stka);
-		}
-		else
-		{
-			sleep(1);
+		push(&stkb, &(*stka));
+		if (*(int *)(*stka)->content == info.bigger)
 			reverse(&(*stka));
-		}
 	}
-	while (*(int *)(*stka)->content != info.smaller)
-		rotate(&(*stka));
 }

@@ -56,7 +56,7 @@ void	dreverse(t_list **stka, t_list **stkb);
 
 // sorting
 void	sort_3(t_list **stk);
-void	sort_6(t_info info, t_list **stka);
+void	sort_5(t_info info, t_list **stka);
 void	sort(t_info info, t_list **stka);
 
 // void	sort_3(t_info info, t_list **stk);

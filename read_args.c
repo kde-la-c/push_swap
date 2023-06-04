@@ -85,8 +85,7 @@ int	read_args(t_args args, t_list **stka)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
-		printf("isrep? %i\n", isnbrep(*stka));
-		if (*stka && ft_lstsize(*stka) > 1)
+		if (*stka /* && ft_lstsize(*stka) > 1 */ && !isnbrep(*stka))
 			return (1);
 		else
 			return (printf("Error\n"), 0);

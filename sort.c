@@ -29,7 +29,8 @@ void	sort(t_info info, t_list **stka)
 	if (check_order(*stka))
 		return ;
 	else if (info.nbargs <= 6)
-		sort_6(info, &(*stka));
+		// sort_6(info, &(*stka));
+		sort_5(info, &(*stka));
 	// else if (info.nbargs == 2)
 	// 	rotate(&(*stka));
 	// else if (info.nbargs == 3)
