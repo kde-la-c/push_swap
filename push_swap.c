@@ -71,11 +71,11 @@ int	main(int argc, char **argv)
 	printf("maxlen :%i\n", info.maxlen);
 	if (stka)
 	{
-		print_list(stka, "a");
-		sort(info, &stka);
+		// print_list(stka, "a");
+		// sort(info, &stka);
 		// sort(info, &stka, 1);
 		// print_list(stka, "a");
-		print_list(stka, "finished");
+		// print_list(stka, "finished");
 		dlfree(&stka, NULL);
 		// dlfree(&stkb, NULL);
 	}

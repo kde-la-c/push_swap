@@ -59,7 +59,10 @@ void	sort_6(t_info info, t_list **stka)
 			info = fill_info(*stka);
 		}
 		else
+		{
+			sleep(1);
 			reverse(&(*stka));
+		}
 	}
 	while (*(int *)(*stka)->content != info.smaller)
 		rotate(&(*stka));

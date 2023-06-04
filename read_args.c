@@ -20,6 +20,29 @@ void	dlfree(t_list **lst, char **split)
 		ft_lstclear(&(*lst), free);
 }
 
+int	isnbrep(t_list *stk)
+{
+	int	i;
+	int	j;
+	int *set;
+
+	i = 0;
+	set = (int *)malloc(sizeof(int) * ft_lstsize(stk));
+	set[0] = *(int *)stk->content;
+	while (stk)
+	{
+		j = 0;
+		while (j < i)
+			if (*(int *)stk->content == set[j++])
+				return (free(set), 1);
+		set[j] = *(int *)stk->content;
+ 		stk = stk->next;
+		i++;
+	}
+	free(set);
+	return (0);
+}
+
 t_list	*get_arg(char *arg, t_list *ret)
 {
 	int		i;
@@ -62,6 +85,7 @@ int	read_args(t_args args, t_list **stka)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
+		printf("isrep? %i\n", isnbrep(*stka));
 		if (*stka && ft_lstsize(*stka) > 1)
 			return (1);
 		else
