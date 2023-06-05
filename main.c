@@ -11,18 +11,29 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "math.h"
 
-void	rec(int i, int r)
+int	ft_sqrt(int nb)
 {
-	if (i)
-		rec(i / 10, r);
-	printf("%i\n", i % (r * 10) / r);
+	int	sub;
+	int	ret;
+
+	sub = 1;
+	ret = 0;
+	if (nb < 0)
+		return (0);
+	else if (nb >= 0)
+	{
+		ret = ft_sqrt(ret - (sub += 2));
+		printf("%i\n", nb);
+		ret++;
+	}
+	return (ret);
 }
 
 int main()
 {
-	int	i = 2378;
-
-	rec(i, 1);
+	int i = sqrt(13) / 1;
+	printf("squirt :%i\n", i);
 	return 0;
 }
