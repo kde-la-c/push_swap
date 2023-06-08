@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_more.c                                        :+:      :+:    :+:   */
+/*   get_positions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kde-la-c <kde-la-c@student.42madrid>       +#+  +:+       +#+        */
+/*   By: kde-la-c <kde-la-c@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/05 19:38:50 by kde-la-c          #+#    #+#             */
-/*   Updated: 2023/06/05 19:38:54 by kde-la-c         ###   ########.fr       */
+/*   Created: 2023/06/07 22:46:01 by kde-la-c          #+#    #+#             */
+/*   Updated: 2023/06/07 22:46:05 by kde-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_more(t_info info, t_list **stka)
+/* t_list	*get_positions(t_list *stka)
 {
-	int	**chunks;
+	t_list	*ret;
 
-	chunks = (int **)malloc(sizeof(int) * )
-}
+	
+	return (ret);
+} */

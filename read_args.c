@@ -85,10 +85,10 @@ int	read_args(t_args args, t_list **stka)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
-		if (*stka /* && ft_lstsize(*stka) > 1 */ && !isnbrep(*stka))
+		if (*stka && !isnbrep(*stka))
 			return (1);
 		else
-			return (printf("Error\n"), 0);
+			return (dlfree(&(*stka), NULL), printf("Error\n"), 0);
 	}
 	else
 		return (printf("Error\n"), 0);

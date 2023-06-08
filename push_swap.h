@@ -59,8 +59,9 @@ void	sort(t_info info, t_list **stka);
 void	sort_2(t_list **stk);
 void	sort_3(t_list **stk);
 void	sort_5(t_info info, t_list **stka);
-void	sort_more(t_info info, t_list **stka);
+void	sort_100(t_info info, t_list **stka);
 
+// void	sort_more(t_info info, t_list **stka);
 // void	sort_3(t_info info, t_list **stk);
 // void	sort(t_info info, t_list **stka, t_list **stkb);
 // void	sort(t_info info, t_list **stka, int r);

@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_100.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kde-la-c <kde-la-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/03 16:37:12 by kde-la-c          #+#    #+#             */
-/*   Updated: 2023/06/03 16:37:32 by kde-la-c         ###   ########.fr       */
+/*   Created: 2023/06/05 19:38:50 by kde-la-c          #+#    #+#             */
+/*   Updated: 2023/06/05 19:38:54 by kde-la-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/**
- * returns 1 is list is ordered
- */
-int	check_order(t_list *stk)
+void	sort_100(t_info info, t_list **stka)
 {
-	while (stk->next && *(int *)stk->content < *(int *)stk->next->content)
-		stk = stk->next;
-	if (stk->next)
-		return (0);
-	return (1);
-}
+	int	i;
+	int	**chunks;
 
-void	sort(t_info info, t_list **stka)
-{
-	if (check_order(*stka))
+	i = 0;
+	chunks = (int **)malloc(sizeof(int *) * 6);
+	if (!chunks)
 		return ;
-	else if (info.nbargs <= 5)
-		sort_5(info, &(*stka));
-	else if (info.nbargs <= 100)
-		sort_100(info, &(*stka));
+	while (i < 5)
+	{
+		chunks[i++] = (int *)malloc(sizeof(int) * (info.nbargs / 5) + 1);
+		if (!chunks[i])
+			ft_dfree((void **)chunks);
+		
+	}
+	chunks[5] = NULL;
+	stka = stka;
+	ft_dfree((void **)chunks);
 }
