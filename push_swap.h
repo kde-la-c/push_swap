@@ -42,6 +42,7 @@ t_list	*get_arg(char *arg, t_list *ret);
 int		read_args(t_args args, t_list **stka);
 t_info	fill_info(t_list *stk);
 int		check_order(t_list *stk);
+t_list	*get_ordinals(t_list *stka);
 
 // operations
 void	swap(t_list **stk);

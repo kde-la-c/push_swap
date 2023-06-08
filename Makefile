@@ -13,6 +13,7 @@
 NAME		= push_swap
 SRC			= push_swap.c\
 			read_args.c\
+			get_ordinals.c\
 			operations.c\
 			doperations.c\
 			sort.c\

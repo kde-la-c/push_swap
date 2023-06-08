@@ -11,29 +11,37 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "math.h"
 
-int	ft_sqrt(int nb)
+int	print_list(t_list *lst, char *str)
 {
-	int	sub;
-	int	ret;
+	int	i;
 
-	sub = 1;
-	ret = 0;
-	if (nb < 0)
-		return (0);
-	else if (nb >= 0)
+	printf("%s :\n", str);
+	if (!lst)
+		return (-1);
+	i = 0;
+	while (lst && lst->content)
 	{
-		ret = ft_sqrt(ret - (sub += 2));
-		printf("%i\n", nb);
-		ret++;
+		// sleep(1);
+		printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
+		lst = lst->next;
 	}
-	return (ret);
+	printf("%i: \033[0;31mNULL\033[0m\n", i);
+	// write(1, ">:cc\n", 5);
+	return (i);
 }
 
 int main()
 {
-	int i = sqrt(13) / 1;
-	printf("squirt :%i\n", i);
+	t_list	*lst;
+	void	*ptr;
+
+	ptr = malloc(sizeof(int));
+	*(int *)ptr = 15;
+	lst = ft_lstnew(NULL);
+	lst->content = ptr;
+	print_list(lst, "AAA");
+	free(ptr);
+	free(lst);
 	return 0;
 }

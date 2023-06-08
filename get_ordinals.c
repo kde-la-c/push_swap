@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_positions.c                                    :+:      :+:    :+:   */
+/*   get_ordinals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kde-la-c <kde-la-c@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,10 +12,22 @@
 
 #include "push_swap.h"
 
-/* t_list	*get_positions(t_list *stka)
+t_list	*get_ordinals(t_list *stka)
 {
 	t_list	*ret;
+	t_list	*tmpret;
+	t_list	*tmpstk;
 
-	
-	return (ret);
-} */
+	// ret = ft_lstdup(stka);
+	ret = NULL;
+	printf("-> %i\n", ft_lstsize(ret));
+	tmpstk = stka;
+	tmpret = ret;
+	while (tmpstk)
+	{
+		tmpret = ft_lstnew("a");
+		tmpstk = tmpstk->next;
+		tmpret = tmpret->next;
+	}
+	return (dlfree(&stka, NULL), ret);
+}

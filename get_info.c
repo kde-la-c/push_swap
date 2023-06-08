@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_list	*get_smaller(t_list *stka)
+/* t_list	*get_smaller(t_list *stka)
 {
 	int		i;
 	t_list	*tmp;
@@ -31,7 +31,7 @@ t_list	*get_smaller(t_list *stka)
 	}
 	
 	return (tmp);
-}
+} */
 
 void	get_extremes(t_info *info, t_list *stk)
 {
