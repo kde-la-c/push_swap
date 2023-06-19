@@ -85,7 +85,7 @@ int	read_args(t_args args, t_list **stka)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
-		// *stka = get_ordinals(*stka);
+		*stka = get_ordinals(*stka, fill_info(*stka));
 		if (*stka && !isnbrep(*stka))
 			return (1);
 		else

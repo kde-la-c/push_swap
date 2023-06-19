@@ -12,6 +12,8 @@
 
 #include "push_swap.h"
 
+
+
 t_list	*fill_list(char *inp)
 {
 	int		i;

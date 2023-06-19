@@ -12,22 +12,54 @@
 
 #include "push_swap.h"
 
-t_list	*get_ordinals(t_list *stka)
+t_list	*get_node(t_list *lst, int node)
 {
-	t_list	*ret;
-	t_list	*tmpret;
-	t_list	*tmpstk;
-
-	// ret = ft_lstdup(stka);
-	ret = NULL;
-	printf("-> %i\n", ft_lstsize(ret));
-	tmpstk = stka;
-	tmpret = ret;
-	while (tmpstk)
+	if (ft_lstsize(lst) < node)
+		return (NULL);
+	while (lst && node >= 0)
 	{
-		tmpret = ft_lstnew("a");
-		tmpstk = tmpstk->next;
-		tmpret = tmpret->next;
+		lst = lst->next;
+		node--;
 	}
-	return (dlfree(&stka, NULL), ret);
+	return (lst);
+}
+
+void	get_order(int *ord, t_list *stka, t_info info)
+{
+	int		i;
+	size_t	ordinal;
+	t_list	*tmp;
+
+	ordinal = 0;
+	while (ordinal < info.nbargs)
+	{
+		tmp = stka;
+		i = 0;
+		info = fill_info(stka);
+		while (tmp && *(int *)tmp->content != info.smaller)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		*(int *)tmp->content = INT32_MAX;
+		ord[i] = ordinal++;
+	}
+}
+
+t_list	*get_ordinals(t_list *stka, t_info info)
+{
+	int		i;
+	t_list	*tmp;
+	int		*ord;
+
+	i = 0;
+	ord = (int *)malloc(sizeof(int) * info.nbargs);
+	get_order(ord, stka, info);
+	tmp = stka;
+	while (tmp)
+	{
+		*(int *)tmp->content = ord[i++];
+		tmp = tmp->next;
+	}
+	return (free(ord), stka);
 }

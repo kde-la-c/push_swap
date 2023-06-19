@@ -12,6 +12,14 @@
 
 #include "push_swap.h"
 
+void	dlfree(t_list **lst, char **split)
+{
+	if (split)
+		ft_dfree((void **)split);
+	if (lst && *lst)
+		ft_lstclear(&(*lst), free);
+}
+
 int	print_list(t_list *lst, char *str)
 {
 	int	i;
@@ -31,17 +39,51 @@ int	print_list(t_list *lst, char *str)
 	return (i);
 }
 
+t_list	*fill_list(char *inp)
+{
+	int		i;
+	t_list	*ret = NULL;
+	void	*cont;
+	char	**split;
+
+	i = 0;
+	split = ft_split(inp, ' ');
+	if (!split)
+		return (NULL);
+	while (split[i])
+	{
+		cont = malloc(sizeof(int));
+		if (!cont)
+			return (dlfree(&ret, split), NULL);
+		*(int *)cont = ft_atoi(split[i++]);
+		ft_lstadd_back(&ret, ft_lstnew(cont));
+	}
+	if (*split)
+		return (dlfree(NULL, split), ret);
+	return (dlfree(NULL, split), NULL);
+}
+
+t_list	*get_node(t_list *lst, int node)
+{
+	if (ft_lstsize(lst) < node)
+		return (NULL);
+	while (lst && node > 0)
+	{
+		lst = lst->next;
+		node--;
+	}
+	return (lst);
+}
+
 int main()
 {
 	t_list	*lst;
-	void	*ptr;
+	// t_list	*test;
 
-	ptr = malloc(sizeof(int));
-	*(int *)ptr = 15;
-	lst = ft_lstnew(NULL);
-	lst->content = ptr;
-	print_list(lst, "AAA");
-	free(ptr);
+	lst = fill_list("7 4 9 8 3 2");
+	// test = get_node(lst, 2);
+	ft_lstdelone(get_node(lst, 2), free);
+	print_list(lst, "result");
 	free(lst);
 	return 0;
 }

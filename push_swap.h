@@ -26,12 +26,20 @@ typedef struct s_args
 // information structure
 typedef struct s_info
 {
-	int		nbargs;
+	size_t	nbargs;
 	int		nbargstmp;
 	int		bigger;
 	int		smaller;
 	int		maxlen;
 }			t_info;
+
+// ordinal list structure
+typedef struct s_ordlst
+{
+	void			*content;
+	int				ordinal;
+	struct s_ordlst	*next;
+}					t_ordlst;
 
 // testing
 int		print_list(t_list *lst, char *str);
@@ -42,7 +50,7 @@ t_list	*get_arg(char *arg, t_list *ret);
 int		read_args(t_args args, t_list **stka);
 t_info	fill_info(t_list *stk);
 int		check_order(t_list *stk);
-t_list	*get_ordinals(t_list *stka);
+t_list	*get_ordinals(t_list *stka, t_info info);
 
 // operations
 void	swap(t_list **stk);
