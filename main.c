@@ -63,27 +63,7 @@ t_list	*fill_list(char *inp)
 	return (dlfree(NULL, split), NULL);
 }
 
-t_list	*get_node(t_list *lst, int node)
-{
-	if (ft_lstsize(lst) < node)
-		return (NULL);
-	while (lst && node > 0)
-	{
-		lst = lst->next;
-		node--;
-	}
-	return (lst);
-}
-
 int main()
 {
-	t_list	*lst;
-	// t_list	*test;
-
-	lst = fill_list("7 4 9 8 3 2");
-	// test = get_node(lst, 2);
-	ft_lstdelone(get_node(lst, 2), free);
-	print_list(lst, "result");
-	free(lst);
 	return 0;
 }

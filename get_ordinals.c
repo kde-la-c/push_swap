@@ -27,11 +27,11 @@ t_list	*get_node(t_list *lst, int node)
 void	get_order(int *ord, t_list *stka, t_info info)
 {
 	int		i;
-	size_t	ordinal;
+	long	ordinal;
 	t_list	*tmp;
 
-	ordinal = 0;
-	while (ordinal < info.nbargs)
+	ordinal = 1;
+	while (ordinal <= info.nbargs)
 	{
 		tmp = stka;
 		i = 0;

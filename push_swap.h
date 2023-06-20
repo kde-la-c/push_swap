@@ -26,20 +26,12 @@ typedef struct s_args
 // information structure
 typedef struct s_info
 {
-	size_t	nbargs;
+	int		nbargs;
 	int		nbargstmp;
 	int		bigger;
 	int		smaller;
 	int		maxlen;
 }			t_info;
-
-// ordinal list structure
-typedef struct s_ordlst
-{
-	void			*content;
-	int				ordinal;
-	struct s_ordlst	*next;
-}					t_ordlst;
 
 // testing
 int		print_list(t_list *lst, char *str);
