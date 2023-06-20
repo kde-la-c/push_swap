@@ -12,23 +12,32 @@
 
 #include "push_swap.h"
 
-void	sort_100(t_info info, t_list **stka)
+int	**make_matrix(t_info info)
 {
-	int	i;
-	int	**chunks;
+	size_t	i;
+	int		j;
+	int		**chunks;
 
 	i = 0;
 	chunks = (int **)malloc(sizeof(int *) * 6);
 	if (!chunks)
-		return ;
+		return (NULL);
 	while (i < 5)
 	{
-		chunks[i++] = (int *)malloc(sizeof(int) * (info.nbargs / 5) + 1);
-		if (!chunks[i])
-			ft_dfree((void **)chunks);
-		
+		j = (info.nbargs / 5) + (i < info.nbargs % 5) + 1;
+		chunks[i] = (int *)malloc(sizeof(int) * j);
+		ft_bzero(chunks[i], (info.nbargs / 5) + j + 1);
+		i++;
 	}
 	chunks[5] = NULL;
+	return (chunks);
+}
+
+void	sort_100(t_info info, t_list **stka)
+{
+	int	**chunks;
+
+	chunks = make_matrix(info);
 	stka = stka;
 	ft_dfree((void **)chunks);
 }

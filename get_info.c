@@ -12,27 +12,6 @@
 
 #include "push_swap.h"
 
-/* t_list	*get_smaller(t_list *stka)
-{
-	int		i;
-	t_list	*tmp;
-	t_list	*node;
-
-	i = 2147483647;
-	tmp = stka;
-	while (stka)
-	{
-		if (stka->next && i < *(int *)stka->next->content)
-		{
-			i = *(int *)stka->next->content;
-			node = stka;
-		}
-		stka = stka->next;
-	}
-	
-	return (tmp);
-} */
-
 void	get_extremes(t_info *info, t_list *stk)
 {
 	int		i;
