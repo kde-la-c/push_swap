@@ -55,50 +55,66 @@ int	**make_matrix(t_info info)
 	return (chunks);
 }
 
-//TODO Wip on the sorting, get_positions should be working fine by now, need to do the loops
-/* int	*get_positions(t_list *stk, int *content)
+//TODO Wip on the sorting, get_closest should be working fine by now, need to do the loops
+int	get_closest(t_list *stk, int *chunk, t_info *info)
 {
+	int		ret;
 	t_count	c;
 	int		*pos;
-	t_info	info;
 
 	c.i = 0;
 	c.k = 0;
-	pos = (int *)malloc(sizeof(int) * content[0]);
-	info = fill_info(stk);
+	*info = fill_info(stk);
+	pos = (int *)malloc(sizeof(int) * chunk[0] + 1);
 	while (stk)
 	{
 		c.j = 1;
-		while (content[c.j])
+		while (chunk[c.j])
 		{
-			if (*(int *)stk->content == content[c.j])
-				pos[c.k] = c.i;
+			if (*(int *)stk->content == chunk[c.j++])
+				pos[c.k++] = c.i;
 		}
+		pos[c.k] = -1;
 		stk = stk->next;
 		c.i++;
 	}
-	return (pos);
+	if (pos[0] > (*info).nbargs - pos[c.k - 1])
+		ret = pos[c.k - 1];
+	else
+		ret = pos[0];
+	return (free(pos), ret);
 }
 
-void	actual_sorting(t_list **stka, int **chunks)
+/* void	actual_sorting(t_list **stka, int **chunks)
 {
-	int		i;
+	t_count	c;
 	t_list	*stkb;
 
-	i = 0;
+	c.i = 0;
 	stkb = NULL;
-	while (chunks[i])
+	while (chunks[c.i])
 	{
-
+		c.j = 1;
+		while (chunks[c.i][c.j])
+		{
+			
+		}
+		c.i++;
 	}
 } */
 
 void	sort_100(t_info info, t_list **stka)
 {
+	// int		i;
+	int		close;
 	int		**chunks;
 
+	// i = 0;
 	chunks = make_matrix(info);
 	// actual_sorting(&(*stka), chunks);
+	close = get_closest(*stka, chunks[2], &info);
+	print_chunks(chunks);
+	printf("closest :%i\n", close);
 	(void)stka;
 	ft_dfree((void **)chunks);
 }
