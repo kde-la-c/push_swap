@@ -55,7 +55,6 @@ int	**make_matrix(t_info info)
 	return (chunks);
 }
 
-//TODO Wip on the sorting, get_closest should be working fine by now, need to do the loops
 int	get_closest(t_list *stk, int *chunk, t_info *info)
 {
 	int		ret;
@@ -70,10 +69,10 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	{
 		c.j = 1;
 		while (chunk[c.j])
-		{
-			if (*(int *)stk->content == chunk[c.j++])
+			if (chunk[c.j] == -1)
+				c.k++;
+			else if (*(int *)stk->content == chunk[c.j++])
 				pos[c.k++] = c.i;
-		}
 		pos[c.k] = -1;
 		stk = stk->next;
 		c.i++;
@@ -85,19 +84,25 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-/* void	actual_sorting(t_list **stka, int **chunks)
+//TODO do stka -> stkb algo by chunks
+/* void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 {
+	int		close;
 	t_count	c;
 	t_list	*stkb;
+	t_list	*tmp;
 
 	c.i = 0;
 	stkb = NULL;
 	while (chunks[c.i])
 	{
+		tmp = *stka;
 		c.j = 1;
-		while (chunks[c.i][c.j])
+		c.k = get_closest(*stka, chunks[c.i], &(*info));
+		while (c.k != *(int *)tmp->content && *stka)
 		{
 			
+			c.j++;
 		}
 		c.i++;
 	}
