@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_100.c                                        :+:      :+:    :+:   */
+/*   sort_100.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kde-la-c <kde-la-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,7 +20,7 @@ void	print_chunks(int **chunks)
 	i = 0;
 	while (chunks[i])
 	{
-		j = 0;
+		j = 1;
 		while (chunks[i][j])
 		{
 			printf("[%i][%i]: %i\n", i, j, chunks[i][j]);
@@ -28,6 +28,7 @@ void	print_chunks(int **chunks)
 		}
 		i++;
 	}
+	printf("[%i]: \033[0;31mNULL\033[0m\n", i);
 }
 
 int	**make_matrix(t_info info)
@@ -55,12 +56,17 @@ int	**make_matrix(t_info info)
 	return (chunks);
 }
 
+/**
+ * returns list index of closest chunk int to reach
+*/
 int	get_closest(t_list *stk, int *chunk, t_info *info)
 {
 	int		ret;
 	t_count	c;
 	int		*pos;
 
+	if (!stk || !chunk)
+		return (-1);
 	c.i = 0;
 	c.k = 0;
 	*info = fill_info(stk);
@@ -70,7 +76,7 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 		c.j = 1;
 		while (chunk[c.j])
 			if (chunk[c.j] == -1)
-				c.k++;
+				c.j++;
 			else if (*(int *)stk->content == chunk[c.j++])
 				pos[c.k++] = c.i;
 		pos[c.k] = -1;
@@ -84,10 +90,8 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-//TODO do stka -> stkb algo by chunks
-/* void	actual_sorting(t_list **stka, int **chunks, t_info *info)
+void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 {
-	int		close;
 	t_count	c;
 	t_list	*stkb;
 	t_list	*tmp;
@@ -96,30 +100,33 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	stkb = NULL;
 	while (chunks[c.i])
 	{
-		tmp = *stka;
-		c.j = 1;
-		c.k = get_closest(*stka, chunks[c.i], &(*info));
-		while (c.k != *(int *)tmp->content && *stka)
+		c.j = get_closest(*stka, chunks[c.i], &(*info));
+		print_list(*stka, "le A");
+		if (c.j != -1)
 		{
-			
-			c.j++;
+			tmp = ft_lstgetnode(*stka, c.j);
+			while (*(int *)tmp->content != *(int *)(*stka)->content)
+			{
+				if (c.j <= (*info).nbargs / 2)
+					reverse(&(*stka));
+				else
+					rotate(&(*stka));
+			}
+			push(&(*stka), &stkb);
 		}
-		c.i++;
+		else
+			c.i++;
 	}
-} */
+	print_list(stkb, "stkb");
+}
 
 void	sort_100(t_info info, t_list **stka)
 {
-	// int		i;
-	int		close;
 	int		**chunks;
 
-	// i = 0;
 	chunks = make_matrix(info);
-	// actual_sorting(&(*stka), chunks);
-	close = get_closest(*stka, chunks[2], &info);
 	print_chunks(chunks);
-	printf("closest :%i\n", close);
-	(void)stka;
+	actual_sorting(&(*stka), chunks, &info);
+	print_chunks(chunks);
 	ft_dfree((void **)chunks);
 }

@@ -22,22 +22,23 @@ void	dlfree(t_list **lst, char **split)
 
 int	isnbrep(t_list *stk)
 {
-	int	i;
-	int	j;
-	int *set;
+	t_count	c;
+	// int	i;
+	// int	j;
+	int		*set;
 
-	i = 0;
+	c.i = 0;
 	set = (int *)malloc(sizeof(int) * ft_lstsize(stk));
 	set[0] = *(int *)stk->content;
 	while (stk)
 	{
-		j = 0;
-		while (j < i)
-			if (*(int *)stk->content == set[j++])
+		c.j = 0;
+		while (c.j < c.i)
+			if (*(int *)stk->content == set[c.j++])
 				return (free(set), 1);
-		set[j] = *(int *)stk->content;
+		set[c.j] = *(int *)stk->content;
  		stk = stk->next;
-		i++;
+		c.i++;
 	}
 	free(set);
 	return (0);

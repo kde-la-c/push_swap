@@ -63,7 +63,48 @@ t_list	*fill_list(char *inp)
 	return (dlfree(NULL, split), NULL);
 }
 
+int	get_closest(t_list *stk, int *chunk, t_info *info)
+{
+	int		ret;
+	t_count	c;
+	int		*pos;
+
+	c.i = 0;
+	c.k = 0;
+	*info = fill_info(stk);
+	pos = (int *)malloc(sizeof(int) * chunk[0] + 1);
+	while (stk)
+	{
+		c.j = 1;
+		while (chunk[c.j])
+		{
+	write(1, "hola\n", 5);
+			if (chunk[c.j] == -1)
+				c.j++;
+			else if (*(int *)stk->content == chunk[c.j++])
+				pos[c.k++] = c.i;
+		}
+		pos[c.k] = -1;
+		stk = stk->next;
+		c.i++;
+	}
+	if (pos[0] > (*info).nbargs - pos[c.k - 1])
+		ret = pos[c.k - 1];
+	else
+		ret = pos[0];
+	return (free(pos), ret);
+}
+
 int main()
 {
+	int closest;
+	int chunk[] = {3, -1, 3, 2, 0};
+	t_list *stk;
+	t_info info;
+
+	stk = fill_list("3 2");
+	info = fill_info(stk);
+	closest = get_closest(stk, chunk, &info);
+	printf("%i\n", closest);
 	return 0;
 }
