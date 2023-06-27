@@ -19,7 +19,9 @@ SRC			= push_swap.c\
 			sort.c\
 			sort_5.c\
 			sort_100.c\
-			get_info.c
+			get_info.c\
+			\
+			test_utils.c
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc

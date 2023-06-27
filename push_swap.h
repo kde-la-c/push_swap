@@ -35,6 +35,8 @@ typedef struct s_info
 
 // testing
 int		print_list(t_list *lst, char *str);
+void	print_chunks(int **chunks);
+t_list	*fill_list(char *inp);
 
 // argument handling
 void	dlfree(t_list **lst, char **split);

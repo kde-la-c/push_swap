@@ -12,14 +12,14 @@
 
 #include "push_swap.h"
 
-t_list	*get_node(t_list *lst, int node)
+t_list	*get_node(t_list *lst, int index)
 {
-	if (ft_lstsize(lst) < node)
+	if (ft_lstsize(lst) < index)
 		return (NULL);
-	while (lst && node >= 0)
+	while (lst && index >= 0)
 	{
 		lst = lst->next;
-		node--;
+		index--;
 	}
 	return (lst);
 }

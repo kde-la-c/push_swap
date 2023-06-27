@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-void	print_chunks(int **chunks)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (chunks[i])
-	{
-		j = 1;
-		while (chunks[i][j])
-		{
-			printf("[%i][%i]: %i\n", i, j, chunks[i][j]);
-			j++;
-		}
-		i++;
-	}
-	printf("[%i]: \033[0;31mNULL\033[0m\n", i);
-}
-
 int	**make_matrix(t_info info)
 {
 	t_count	c;
@@ -65,12 +46,11 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	t_count	c;
 	int		*pos;
 
-	if (!stk || !chunk)
-		return (-1);
 	c.i = 0;
 	c.k = 0;
+	if (!stk || !chunk || !(pos = (int *)malloc(sizeof(int) * chunk[0] + 1)))
+		return (-1);
 	*info = fill_info(stk);
-	pos = (int *)malloc(sizeof(int) * chunk[0] + 1);
 	while (stk)
 	{
 		c.j = 1;
@@ -83,11 +63,36 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 		stk = stk->next;
 		c.i++;
 	}
+	ret = pos[0];
 	if (pos[0] > (*info).nbargs - pos[c.k - 1])
 		ret = pos[c.k - 1];
-	else
-		ret = pos[0];
 	return (free(pos), ret);
+}
+
+void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
+{
+	t_count	c;
+
+	c.i = 4;
+	c.j = 0;
+	while (c.i >= 0)
+	{
+		c.j = chunks[c.i][0];
+		while (c.j)
+		{
+			c.k = 0;
+			while (*(int *)(*stkb)->content != chunks[c.i][c.j])
+			{
+				reverse(&(*stkb));
+				c.k++;
+			}
+			push(&(*stkb), &(*stka));
+			while (!c.k--)
+				rotate(&(*stkb));
+			c.j--;
+		}
+		c.i--;
+	}
 }
 
 void	actual_sorting(t_list **stka, int **chunks, t_info *info)
@@ -101,23 +106,22 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 	while (chunks[c.i])
 	{
 		c.j = get_closest(*stka, chunks[c.i], &(*info));
-		print_list(*stka, "le A");
 		if (c.j != -1)
 		{
 			tmp = ft_lstgetnode(*stka, c.j);
 			while (*(int *)tmp->content != *(int *)(*stka)->content)
-			{
 				if (c.j <= (*info).nbargs / 2)
 					reverse(&(*stka));
 				else
 					rotate(&(*stka));
-			}
 			push(&(*stka), &stkb);
 		}
 		else
 			c.i++;
 	}
-	print_list(stkb, "stkb");
+	// print_list(stkb, "stkb");
+	actual_sorting2(&(*stka), &stkb, chunks);
+	ft_lstclear(&stkb, free);
 }
 
 void	sort_100(t_info info, t_list **stka)
@@ -125,8 +129,8 @@ void	sort_100(t_info info, t_list **stka)
 	int		**chunks;
 
 	chunks = make_matrix(info);
-	print_chunks(chunks);
+	// print_chunks(chunks);
 	actual_sorting(&(*stka), chunks, &info);
-	print_chunks(chunks);
+	// print_chunks(chunks);
 	ft_dfree((void **)chunks);
 }
