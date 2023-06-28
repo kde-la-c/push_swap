@@ -83,12 +83,12 @@ void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
 			c.k = 0;
 			while (*(int *)(*stkb)->content != chunks[c.i][c.j])
 			{
-				reverse(&(*stkb));
+				operation(&(*stka), &(*stkb), "rrb");
 				c.k++;
 			}
-			push(&(*stkb), &(*stka));
+			operation(&(*stka), &(*stkb), "pb");
 			while (!c.k--)
-				rotate(&(*stkb));
+				operation(&(*stka), &(*stkb), "rb");
 			c.j--;
 		}
 		c.i--;
@@ -111,15 +111,14 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 			tmp = ft_lstgetnode(*stka, c.j);
 			while (*(int *)tmp->content != *(int *)(*stka)->content)
 				if (c.j <= (*info).nbargs / 2)
-					reverse(&(*stka));
+					operation(&(*stka), NULL, "rra");
 				else
-					rotate(&(*stka));
-			push(&(*stka), &stkb);
+					operation(&(*stka), NULL, "ra");
+			operation(&(*stka), &stkb, "pa");
 		}
 		else
 			c.i++;
 	}
-	// print_list(stkb, "stkb");
 	actual_sorting2(&(*stka), &stkb, chunks);
 	ft_lstclear(&stkb, free);
 }

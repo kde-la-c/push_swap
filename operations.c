@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	swap(t_list **stk)
+int	swap(t_list **stk)
 {
 	void	*pt;
 	t_list	*tmp;
@@ -23,46 +23,55 @@ void	swap(t_list **stk)
 		pt = tmp->content;
 		tmp->content = tmp->next->content;
 		tmp->next->content = pt;
+		return (1);
 	}
-	else
-		return ;
-	printf("swap\n");
+	return (0);
 }
 
-void	push(t_list **stksrc, t_list **stkdst)
+int	push(t_list **stksrc, t_list **stkdst)
 {
 	t_list	*tmp;
 
-	tmp = *stksrc;
-	*stksrc = (*stksrc)->next;
-	tmp->next = NULL;
-	ft_lstadd_front(&(*stkdst), tmp);
-	printf("push\n");
+	if (*stksrc)
+	{
+		tmp = *stksrc;
+		*stksrc = (*stksrc)->next;
+		tmp->next = NULL;
+		ft_lstadd_front(&(*stkdst), tmp);
+		return (1);
+	}
+	return (0);
 }
 
-void	rotate(t_list **stk)
+int	rotate(t_list **stk)
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
 
-	if (!(*stk && (*stk)->next))
-		return ;
-	tmp1 = *stk;
-	while (tmp1 && tmp1->next && tmp1->next->next)
-		tmp1 = tmp1->next;
-	tmp2 = tmp1->next;
-	tmp1->next = NULL;
-	ft_lstadd_front(&(*stk), tmp2);
-	printf("rotate\n");
+	if (*stk && (*stk)->next)
+	{
+		tmp1 = *stk;
+		while (tmp1 && tmp1->next && tmp1->next->next)
+			tmp1 = tmp1->next;
+		tmp2 = tmp1->next;
+		tmp1->next = NULL;
+		ft_lstadd_front(&(*stk), tmp2);
+		return (1);
+	}
+	return (0);
 }
 
-void	reverse(t_list **stk)
+int	reverse(t_list **stk)
 {
 	t_list	*tmp;
 
-	tmp = *stk;
-	*stk = (*stk)->next;
-	tmp->next = NULL;
-	ft_lstadd_back(&(*stk), tmp);
-	printf("reverse\n");
+	if (*stk && (*stk)->next)
+	{
+		tmp = *stk;
+		*stk = (*stk)->next;
+		tmp->next = NULL;
+		ft_lstadd_back(&(*stk), tmp);
+		return (1);
+	}
+	return (0);
 }

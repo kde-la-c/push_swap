@@ -17,24 +17,18 @@ int	main(int argc, char **argv)
 	t_args	args;
 	t_info	info;
 	t_list	*stka;
-	// t_list	*stkb = NULL;
 
 	args.argc = argc;
 	args.argv = argv;
 	stka = NULL;
-	// stkb = fill_list("1 22 333 4444 55555");
 	read_args(args, &stka);
 	info = fill_info(stka);
-	// printf("maxlen :%i\n", info.maxlen);
 	if (stka)
 	{
-		// print_list(stka, "a");
+		print_list(stka, "a");
 		sort(info, &stka);
-		// sort(info, &stka, 1);
-		// print_list(stka, "a");
-		// print_list(stka, "finished");
+		print_list(stka, "finished");
 		dlfree(&stka, NULL);
-		// dlfree(&stkb, NULL);
 	}
 	return (0);
 }

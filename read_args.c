@@ -23,8 +23,6 @@ void	dlfree(t_list **lst, char **split)
 int	isnbrep(t_list *stk)
 {
 	t_count	c;
-	// int	i;
-	// int	j;
 	int		*set;
 
 	c.i = 0;

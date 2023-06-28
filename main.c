@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+/* 
 void	dlfree(t_list **lst, char **split)
 {
 	if (split)
@@ -94,17 +94,15 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 		ret = pos[0];
 	return (free(pos), ret);
 }
-
+ */
 int main()
 {
-	int closest;
-	int chunk[] = {3, -1, 3, 2, 0};
-	t_list *stk;
-	t_info info;
+	char	*str;
 
-	stk = fill_list("3 2");
-	info = fill_info(stk);
-	closest = get_closest(stk, chunk, &info);
-	printf("%i\n", closest);
+	str = ft_strdup("hola");
+	if (ft_strncmp(str, "hol", 4))
+		printf("pinto que si");
+	else
+		printf("pinto que te cagas");
 	return 0;
 }

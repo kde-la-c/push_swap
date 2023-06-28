@@ -15,7 +15,7 @@ SRC			= push_swap.c\
 			read_args.c\
 			get_ordinals.c\
 			operations.c\
-			doperations.c\
+			operation.c\
 			sort.c\
 			sort_5.c\
 			sort_100.c\
