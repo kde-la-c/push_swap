@@ -47,7 +47,7 @@ int		check_order(t_list *stk);
 t_list	*get_ordinals(t_list *stka, t_info info);
 
 // operations
-void	operation(t_list **stka, t_list **stkb, char *operation);
+int		operation(t_list **stka, t_list **stkb, char *operation);
 int		swap(t_list **stk);
 int		push(t_list **stksrc, t_list **stkdst);
 int		rotate(t_list **stk);

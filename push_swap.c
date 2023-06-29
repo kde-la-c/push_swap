@@ -25,9 +25,9 @@ int	main(int argc, char **argv)
 	info = fill_info(stka);
 	if (stka)
 	{
-		print_list(stka, "a");
+		// print_list(stka, "a");
 		sort(info, &stka);
-		print_list(stka, "finished");
+		// print_list(stka, "finished");
 		dlfree(&stka, NULL);
 	}
 	return (0);

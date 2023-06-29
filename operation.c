@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	operation_a(t_list **stka, t_list **stkb, char *operation)
+int	operation_a(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
 
@@ -27,10 +27,11 @@ void	operation_a(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		printf("%s\n", operation);
+		return (printf("%s\n", operation), 1);
+	return (0);
 }
 
-void	operation_b(t_list **stka, t_list **stkb, char *operation)
+int	operation_b(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
 
@@ -45,10 +46,11 @@ void	operation_b(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		printf("%s\n", operation);
+		return (printf("%s\n", operation), 1);
+	return (0);
 }
 
-void	operation_ab(t_list **stka, t_list **stkb, char *operation)
+int	operation_ab(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
 
@@ -70,17 +72,16 @@ void	operation_ab(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success == 2)
-		printf("%s\n", operation);
+		return (printf("%s\n", operation), 1);
+	return (0);
 }
 
-void	operation(t_list **stka, t_list **stkb, char *operation)
+int	operation(t_list **stka, t_list **stkb, char *operation)
 {
 	if (ft_strchr(operation, 'a'))
-	{
-		operation_a(&(*stka), &(*stkb), operation);
-	}
+		return (operation_a(&(*stka), &(*stkb), operation));
 	else if (ft_strchr(operation, 'b'))
-		operation_b(&(*stka), &(*stkb), operation);
+		return (operation_b(&(*stka), &(*stkb), operation));
 	else
-		operation_ab(&(*stka), &(*stkb), operation);
+		return (operation_ab(&(*stka), &(*stkb), operation));
 }

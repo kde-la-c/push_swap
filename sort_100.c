@@ -69,7 +69,7 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
+/* void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
 {
 	t_count	c;
 
@@ -92,6 +92,34 @@ void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
 			c.j--;
 		}
 		c.i--;
+	}
+} */
+
+void	actual_sorting2(t_list **stka, t_list **stkb)
+{
+	t_count	c;
+	t_info	a_info;
+
+	operation(&(*stka), &(*stkb), "pb");
+	while (*stkb)
+	{
+		a_info = fill_info(*stka);
+		if (*(int *)(*stkb)->content < a_info.smaller)
+			operation(&(*stka), &(*stkb), "pb");
+		else if (*(int *)(*stkb)->content > a_info.bigger)
+		{
+			operation(&(*stka), &(*stkb), "pb");
+			operation(&(*stka), &(*stkb), "rra");
+		}
+		else
+		{
+			c.i = 0;
+			while (*(int *)(*stkb)->content > *(int *)(*stka)->content)
+				c.i += operation(&(*stka), &(*stkb), "rra");
+			operation(&(*stka), &(*stkb), "pb");
+			while (c.i-- > 0)
+				operation(&(*stka), &(*stkb), "ra");
+		}
 	}
 }
 
@@ -119,7 +147,7 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 		else
 			c.i++;
 	}
-	actual_sorting2(&(*stka), &stkb, chunks);
+	actual_sorting2(&(*stka), &stkb);
 	ft_lstclear(&stkb, free);
 }
 
