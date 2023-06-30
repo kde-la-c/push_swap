@@ -95,14 +95,20 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
  */
+
+int	isnb(int *arr, int nb)
+{
+	while (*arr)
+		if (nb == *(arr++))
+			return (1);
+	return (0);
+}
+
 int main()
 {
-	char	*str;
+	int arr[] = {1, 4, 7, 9, 0};
+	int i = 8;
 
-	str = ft_strdup("hola");
-	if (ft_strncmp(str, "hol", 4))
-		printf("pinto que si");
-	else
-		printf("pinto que te cagas");
+	printf("%i\n", isnb(arr, i));
 	return 0;
 }
