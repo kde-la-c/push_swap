@@ -17,5 +17,5 @@ a.out
 
 push_swap
 push_swap_visualizer
-optimization_scripts/nb_db
-optimization_scripts/output*
+optimization_scripts/*
+!optimization_scripts/*.sh
