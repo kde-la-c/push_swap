@@ -107,8 +107,8 @@ int	isnb(int *arr, int nb)
 int main()
 {
 	int arr[] = {1, 4, 7, 9, 0};
-	int i = 8;
+	// int i = 8;
 
-	printf("%i\n", isnb(arr, i));
+	printf("%i\n", arr[-1]);
 	return 0;
 }

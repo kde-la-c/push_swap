@@ -46,6 +46,7 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	t_count	c;
 	int		*pos;
 
+	// print_list(stk, "lst");
 	c.i = 0;
 	c.k = 0;
 	if (!stk || !chunk || !(pos = (int *)malloc(sizeof(int) * chunk[0] + 1)))
@@ -55,10 +56,10 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	{
 		c.j = 1;
 		while (chunk[c.j])
-			if (chunk[c.j] == -1)
-				c.j++;
-			else if (*(int *)stk->content == chunk[c.j++])
+			if (*(int *)stk->content == chunk[c.j++])
 				pos[c.k++] = c.i;
+			else
+				c.j++;
 		pos[c.k] = -1;
 		stk = stk->next;
 		c.i++;
@@ -69,39 +70,13 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-/* void	actual_sorting2(t_list **stka, t_list **stkb, int **chunks)
-{
-	t_count	c;
-
-	c.i = 4;
-	c.j = 0;
-	while (c.i >= 0)
-	{
-		c.j = chunks[c.i][0];
-		while (c.j)
-		{
-			c.k = 0;
-			while (*(int *)(*stkb)->content != chunks[c.i][c.j])
-			{
-				operation(&(*stka), &(*stkb), "rrb");
-				c.k++;
-			}
-			operation(&(*stka), &(*stkb), "pb");
-			while (!c.k--)
-				operation(&(*stka), &(*stkb), "rb");
-			c.j--;
-		}
-		c.i--;
-	}
-} */
-
 void	actual_sorting2(t_list **stka, t_list **stkb)
 {
 	t_count	c;
 	t_info	a_info;
 
 	operation(&(*stka), &(*stkb), "pb");
-	while (*stkb)
+	while ((*stkb)->next)
 	{
 		a_info = fill_info(*stka);
 		if (*(int *)(*stkb)->content < a_info.smaller)
@@ -134,7 +109,8 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 	while (chunks[c.i])
 	{
 		c.j = get_closest(*stka, chunks[c.i], &(*info));
-		if (c.j != -1)
+		// printf("c.j :%li\n", c.j);
+		if (c.j > -1)
 		{
 			tmp = ft_lstgetnode(*stka, c.j);
 			while (*(int *)tmp->content != *(int *)(*stka)->content)
@@ -145,7 +121,10 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 			operation(&(*stka), &stkb, "pa");
 		}
 		else
+		{
 			c.i++;
+			write(1, "holi\n", 5);
+		}
 	}
 	actual_sorting2(&(*stka), &stkb);
 	ft_lstclear(&stkb, free);
