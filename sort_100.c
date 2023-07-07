@@ -70,32 +70,6 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-/* void	push_ordered(t_list **stka, t_list **stkb, int **chunks)
-{
-	t_count	c;
-
-	c.i = 4;
-	c.j = 0;
-	while (c.i >= 0)
-	{
-		c.j = chunks[c.i][0];
-		while (c.j)
-		{
-			c.k = 0;
-			while (*(int *)(*stkb)->content != chunks[c.i][c.j])
-			{
-				operation(&(*stka), &(*stkb), "rrb");
-				c.k++;
-			}
-			operation(&(*stka), &(*stkb), "pb");
-			while (!c.k--)
-				operation(&(*stka), &(*stkb), "rb");
-			c.j--;
-		}
-		c.i--;
-	}
-} */
-
 void	push_ordered(t_list **stka, t_list **stkb)
 {
 	t_count	c;
@@ -122,37 +96,6 @@ void	push_ordered(t_list **stka, t_list **stkb)
 		}
 	}
 }
-
-/* void	push_ordered(t_list **stka, t_list **stkb, int **chunks)
-{
-	t_count	c;
-	t_info	a_info;
-
-	c.i = 0;
-	c.j = 0;
-	operation(&(*stka), &(*stkb), "pb");
-	while (*stkb)
-	{
-		a_info = fill_info(*stka);
-		if (!isnb(chunks[c.j], *(int *)(*stkb)->content) && )
-
-		if (*(int *)(*stkb)->content < a_info.smaller)
-			operation(&(*stka), &(*stkb), "pb");
-		else if (*(int *)(*stkb)->content > a_info.bigger)
-		{
-			operation(&(*stka), &(*stkb), "pb");
-			operation(&(*stka), &(*stkb), "rra");
-		}
-		else
-		{
-			while (*(int *)(*stkb)->content > *(int *)(*stka)->content)
-				c.i += operation(&(*stka), &(*stkb), "rra");
-			operation(&(*stka), &(*stkb), "pb");
-			// while (c.i > 0)
-			// 	c.i -= operation(&(*stka), &(*stkb), "ra");
-		}
-	}
-} */
 
 int	isnb(int *arr, int nb)
 {
