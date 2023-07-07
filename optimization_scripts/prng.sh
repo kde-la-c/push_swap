@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file=nb_db
+file=nb_db.txt
 
 echo > $file
 
