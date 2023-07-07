@@ -11,8 +11,11 @@
 # **************************************************************************** #
 
 a.out
-push_swap
-push_swap_visualizer
 .vscode
+.DS_Store
 *.o
 *.a
+
+push_swap
+push_swap_visualizer
+optimization_scripts/*
