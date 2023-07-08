@@ -22,13 +22,13 @@ int	**make_matrix(t_info info)
 	c.k = 1;
 	// c.l = nbchunks;
 	c.l = 5;
-	chunks = (int **)malloc(sizeof(int *) * c.l + 1);
-	if (!chunks)
+	if (!(chunks = (int **)malloc(sizeof(int *) * c.l + 1)))
 		return (NULL);
 	while (c.i < c.l)
 	{
 		c.j = (info.nbargs / c.l) + (c.i < info.nbargs % c.l) + 2;
-		chunks[c.i] = (int *)malloc(sizeof(int) * c.j);
+		if (!(chunks[c.i] = (int *)malloc(sizeof(int) * c.j)))
+			return (dlfree(NULL, (char **)chunks), NULL);
 		chunks[c.i][0] = c.j - 2;
 		chunks[c.i][c.j - 1] = 0;
 		c.j = 1;
@@ -58,17 +58,17 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	{
 		c.j = 1;
 		while (chunk[c.j])
-			if (*(int *)stk->content == chunk[c.j++])
-				pos[c.k++] = c.i;
-			else
+			if (!(*(int *)stk->content == chunk[c.j++]))
 				c.j++;
+			else
+				pos[c.k++] = c.i;
 		pos[c.k] = -1;
 		stk = stk->next;
 		c.i++;
 	}
 	ret = pos[0];
-	if (pos[0] > (*info).nbargs - pos[c.k - 1])
-		ret = pos[c.k - 1];
+	if (pos[0] != -1 && pos[0] > (*info).nbargs - pos[c.k - 1])
+		ret = pos[c.k - 1];	
 	return (free(pos), ret);
 }
 
