@@ -12,6 +12,7 @@
 
 a.out
 .vscode
+.DS_Store
 *.o
 *.a
 .DS_Store
