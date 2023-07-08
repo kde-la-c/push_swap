@@ -12,14 +12,16 @@
 
 #include "push_swap.h"
 
-int	**make_matrix(t_info info, int nbchunks)
+// int	**make_matrix(t_info info, int nbchunks)
+int	**make_matrix(t_info info)
 {
 	t_count	c;
 	int		**chunks;
 
 	c.i = 0;
 	c.k = 1;
-	c.l = nbchunks;
+	// c.l = nbchunks;
+	c.l = 5;
 	chunks = (int **)malloc(sizeof(int *) * c.l + 1);
 	if (!chunks)
 		return (NULL);
@@ -47,7 +49,6 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	t_count	c;
 	int		*pos;
 
-	// print_list(stk, "lst");
 	c.i = 0;
 	c.k = 0;
 	if (!stk || !chunk || !(pos = (int *)malloc(sizeof(int) * chunk[0] + 1)))
@@ -117,7 +118,6 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 	while (chunks[c.i])
 	{
 		c.j = get_closest(*stka, chunks[c.i], &(*info));
-		// printf("c.j :%li\n", c.j);
 		if (c.j > -1)
 		{
 			tmp = ft_lstgetnode(*stka, c.j);
@@ -131,18 +131,19 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 		else
 		{
 			c.i++;
-			write(1, "holi\n", 5);
 		}
 	}
 	push_ordered(&(*stka), &stkb);
 	ft_lstclear(&stkb, free);
 }
 
-void	sort_100(t_info info, t_list **stka, int nbchunks)
+// void	sort_100(t_info info, t_list **stka, int nbchunks)
+void	sort_100(t_info info, t_list **stka)
 {
 	int		**chunks;
 
-	chunks = make_matrix(info, nbchunks);
+	// chunks = make_matrix(info, nbchunks);
+	chunks = make_matrix(info);
 	// print_chunks(chunks);
 	push_chunks(&(*stka), chunks, &info);
 	// print_chunks(chunks);

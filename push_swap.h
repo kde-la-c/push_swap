@@ -59,12 +59,12 @@ int		reverse(t_list **stk);
 // void	dreverse(t_list **stka, t_list **stkb);
 
 // sorting
-// void	sort(t_info info, t_list **stka);
-void	sort(t_info info, t_list **stka, int chunks);
+void	sort(t_info info, t_list **stka);
+// void	sort(t_info info, t_list **stka, int chunks);
 void	sort_2(t_list **stk);
 void	sort_3(t_list **stk);
 void	sort_5(t_info info, t_list **stka);
-// void	sort_100(t_info info, t_list **stka);
-void	sort_100(t_info info, t_list **stka, int nbchunks);
+void	sort_100(t_info info, t_list **stka);
+// void	sort_100(t_info info, t_list **stka, int nbchunks);
 
 #endif

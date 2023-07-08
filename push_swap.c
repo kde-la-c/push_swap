@@ -26,7 +26,8 @@ int	main(int argc, char **argv)
 	if (stka)
 	{
 		// print_list(stka, "a");
-		sort(info, &stka, ft_atoi(argv[1]));
+		// sort(info, &stka, ft_atoi(argv[1]));
+		sort(info, &stka);
 		// print_list(stka, "finished");
 		dlfree(&stka, NULL);
 	}
