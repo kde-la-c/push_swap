@@ -11,10 +11,10 @@
 # **************************************************************************** #
 
 a.out
-.vscode
 .DS_Store
 *.o
 *.a
+dbg*
 
 push_swap
 push_swap_visualizer

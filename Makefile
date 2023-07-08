@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME		= push_swap
+NAME_DEBUG	= dbg
 SRC			= push_swap.c\
 			read_args.c\
 			get_ordinals.c\
@@ -36,17 +37,23 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
+	$(RM) $(RFLAGS) $(OBJS)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 l:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=leak -g $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=leak -g3 $(OBJS) -o $(NAME) $(LIBNAME)
 			$(RM) $(RFLAGS) $(OBJS)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 m:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=address -g $(OBJS) -o $(NAME) $(LIBNAME)
+			$(CC) $(CFLAGS) -fsanitize=address -g3 $(OBJS) -o $(NAME) $(LIBNAME)
 			$(RM) $(RFLAGS) $(OBJS)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
+
+debug: $(NAME_DEBUG)
+
+$(NAME_DEBUG): $(LIBNAME)
+			$(CC) $(CFLAGS) -fdiagnostics-color=always -g3 $(SRC) $(LIBNAME) -o $@
 
 $(LIBNAME):
 			$(MAKE) -C $(LIBPATH)
@@ -63,4 +70,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re debug
