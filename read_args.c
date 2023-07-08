@@ -76,11 +76,11 @@ int	read_args(t_args args, t_list **stka)
 	int		i;
 	t_list	*tmp;
 
-	i = 1;
+	i = 2;
 	tmp = NULL;
-	if (args.argc == 1)
+	if (args.argc == 2)
 		return (printf("%s\n", args.argv[0]), 0);
-	else if (args.argc > 1)
+	else if (args.argc > 2)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));

@@ -15,7 +15,9 @@ a.out
 .DS_Store
 *.o
 *.a
+.DS_Store
 
 push_swap
 push_swap_visualizer
 optimization_scripts/*
+!optimization_scripts/*.sh

@@ -12,19 +12,20 @@
 
 #include "push_swap.h"
 
-int	**make_matrix(t_info info)
+int	**make_matrix(t_info info, int nbchunks)
 {
 	t_count	c;
 	int		**chunks;
 
 	c.i = 0;
 	c.k = 1;
-	chunks = (int **)malloc(sizeof(int *) * 6);
+	c.l = nbchunks;
+	chunks = (int **)malloc(sizeof(int *) * c.l + 1);
 	if (!chunks)
 		return (NULL);
-	while (c.i < 5)
+	while (c.i < c.l)
 	{
-		c.j = (info.nbargs / 5) + (c.i < info.nbargs % 5) + 2;
+		c.j = (info.nbargs / c.l) + (c.i < info.nbargs % c.l) + 2;
 		chunks[c.i] = (int *)malloc(sizeof(int) * c.j);
 		chunks[c.i][0] = c.j - 2;
 		chunks[c.i][c.j - 1] = 0;
@@ -33,7 +34,7 @@ int	**make_matrix(t_info info)
 			chunks[c.i][c.j++] = c.k++;
 		c.i++;
 	}
-	chunks[5] = NULL;
+	chunks[c.l] = NULL;
 	return (chunks);
 }
 
@@ -70,7 +71,7 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	return (free(pos), ret);
 }
 
-void	actual_sorting2(t_list **stka, t_list **stkb)
+void	push_ordered(t_list **stka, t_list **stkb)
 {
 	t_count	c;
 	t_info	a_info;
@@ -88,17 +89,24 @@ void	actual_sorting2(t_list **stka, t_list **stkb)
 		}
 		else
 		{
-			c.i = 0;
 			while (*(int *)(*stkb)->content > *(int *)(*stka)->content)
 				c.i += operation(&(*stka), &(*stkb), "rra");
 			operation(&(*stka), &(*stkb), "pb");
-			while (c.i-- > 0)
-				operation(&(*stka), &(*stkb), "ra");
+			while (c.i > 0)
+				c.i -= operation(&(*stka), &(*stkb), "ra");
 		}
 	}
 }
 
-void	actual_sorting(t_list **stka, int **chunks, t_info *info)
+int	isnb(int *arr, int nb)
+{
+	while (*arr)
+		if (nb == *(arr++))
+			return (1);
+	return (0);
+}
+
+void	push_chunks(t_list **stka, int **chunks, t_info *info)
 {
 	t_count	c;
 	t_list	*stkb;
@@ -126,17 +134,18 @@ void	actual_sorting(t_list **stka, int **chunks, t_info *info)
 			write(1, "holi\n", 5);
 		}
 	}
-	actual_sorting2(&(*stka), &stkb);
+	push_ordered(&(*stka), &stkb);
 	ft_lstclear(&stkb, free);
 }
 
-void	sort_100(t_info info, t_list **stka)
+void	sort_100(t_info info, t_list **stka, int nbchunks)
 {
 	int		**chunks;
 
-	chunks = make_matrix(info);
+	chunks = make_matrix(info, nbchunks);
 	// print_chunks(chunks);
-	actual_sorting(&(*stka), chunks, &info);
+	push_chunks(&(*stka), chunks, &info);
 	// print_chunks(chunks);
 	ft_dfree((void **)chunks);
+	// printf("nbch :%i\n", nbchunks);
 }
