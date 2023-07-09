@@ -31,7 +31,7 @@ void	sort(t_info info, t_list **stka)
 		return ;
 	else if (info.nbargs <= 5)
 		sort_5(info, &(*stka));
-	else if (info.nbargs <= 100)
+	else
 		// sort_100(info, &(*stka), chunks);
 		sort_100(info, &(*stka));
 }

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME		= push_swap
-NAME_DEBUG	= dbg
+NAME_DBG	= dbg
 SRC			= push_swap.c\
 			read_args.c\
 			get_ordinals.c\
@@ -28,7 +28,7 @@ INCLUDE		= push_swap.h
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 RM			= rm
-RFLAGS		= -f
+RFLAGS		= -rf
 
 LIBNAME		= libft.a
 LIBPATH		= libft/
@@ -50,9 +50,9 @@ m:			$(OBJS) $(INCLUDE) $(LIBNAME)
 			$(RM) $(RFLAGS) $(OBJS)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
-debug: $(NAME_DEBUG)
+debug:		$(NAME_DBG)
 
-$(NAME_DEBUG): $(LIBNAME)
+$(NAME_DBG): $(LIBNAME) $(SRC)
 			$(CC) $(CFLAGS) -fdiagnostics-color=always -g3 $(SRC) $(LIBNAME) -o $@
 
 $(LIBNAME):

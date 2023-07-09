@@ -39,7 +39,7 @@ void	print_chunks(int **chunks)
 	i = 0;
 	while (chunks[i])
 	{
-		j = 1;
+		j = 0;
 		while (chunks[i][j])
 		{
 			printf("[%i][%i]: %i\n", i, j, chunks[i][j]);
