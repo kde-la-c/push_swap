@@ -30,8 +30,8 @@ void	sort_3(t_list **stk)
 	}
 	if (*(int *)(*stk)->content == info.bigger)
 		operation(&(*stk), NULL, "rra");
-	if (!check_order(*stk) &&
-		*(int *)ft_lstlast(*stk)->content == info.bigger)
+	if (!check_order(*stk)
+		&& *(int *)ft_lstlast(*stk)->content == info.bigger)
 		operation(&(*stk), NULL, "sa");
 	if (*(int *)(*stk)->next->content == info.bigger)
 		operation(&(*stk), NULL, "ra");
@@ -45,14 +45,16 @@ void	sort_5(t_info info, t_list **stka)
 
 	stkb = NULL;
 	while (info.nbargs > 3)
+	{
 		if (*(int *)(*stka)->content == info.smaller
 			|| *(int *)(*stka)->content == info.bigger)
 		{
 			operation(&(*stka), &stkb, "pa");
 			info.nbargs--;
 		}
-	else
-		operation(&(*stka), NULL, "ra");
+		else
+			operation(&(*stka), NULL, "ra");
+	}
 	sort_3(&(*stka));
 	while (stkb)
 	{

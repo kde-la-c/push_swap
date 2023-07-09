@@ -125,8 +125,8 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 			while (*(int *)tmp->content != *(int *)(*stka)->content)
 				if (c.j <= (*info).nbargs / 2)
 					operation(&(*stka), NULL, "rra");
-				else
-					operation(&(*stka), NULL, "ra");
+			else
+				operation(&(*stka), NULL, "ra");
 			operation(&(*stka), &stkb, "pa");
 		}
 		else

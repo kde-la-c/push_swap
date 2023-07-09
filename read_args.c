@@ -35,7 +35,7 @@ int	isnbrep(t_list *stk)
 			if (*(int *)stk->content == set[c.j++])
 				return (free(set), 1);
 		set[c.j] = *(int *)stk->content;
- 		stk = stk->next;
+		stk = stk->next;
 		c.i++;
 	}
 	free(set);
