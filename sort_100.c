@@ -144,9 +144,9 @@ void	sort_100(t_info info, t_list **stka)
 	// chunks = make_matrix(info, nbchunks);
 	chunks = make_matrix(info);
 	// print_chunks(chunks);
-	// printf("rand chunk bit :%i\n", chunks[1][0]);
+	// ft_printf("rand chunk bit :%i\n", chunks[1][0]);
 	push_chunks(&(*stka), chunks, &info);
 	// print_chunks(chunks);
 	ft_dfree((void **)chunks);
-	// printf("nbch :%i\n", nbchunks);
+	// ft_printf("nbch :%i\n", nbchunks);
 }

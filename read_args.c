@@ -81,7 +81,7 @@ int	read_args(t_args args, t_list **stka)
 	tmp = NULL;
 	// if (args.argc == 2)
 	if (args.argc == 1)
-		return (printf("%s\n", args.argv[0]), 0);
+		return (ft_printf("%s\n", args.argv[0]), 0);
 	// else if (args.argc > 2)
 	else if (args.argc > 1)
 	{
@@ -91,8 +91,8 @@ int	read_args(t_args args, t_list **stka)
 		if (*stka && !isnbrep(*stka))
 			return (1);
 		else
-			return (dlfree(&(*stka), NULL), printf("Error\n"), 0);
+			return (dlfree(&(*stka), NULL), ft_printf("Error\n"), 0);
 	}
 	else
-		return (printf("Error\n"), 0);
+		return (ft_printf("Error\n"), 0);
 }

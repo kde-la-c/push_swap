@@ -27,7 +27,7 @@ int	operation_a(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		return (printf("%s\n", operation), 1);
+		return (ft_printf("%s\n", operation), 1);
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	operation_b(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		return (printf("%s\n", operation), 1);
+		return (ft_printf("%s\n", operation), 1);
 	return (0);
 }
 
@@ -72,7 +72,7 @@ int	operation_ab(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success == 2)
-		return (printf("%s\n", operation), 1);
+		return (ft_printf("%s\n", operation), 1);
 	return (0);
 }
 
