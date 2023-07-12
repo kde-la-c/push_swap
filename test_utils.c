@@ -31,6 +31,20 @@ int	print_list(t_list *lst, char *str)
 	return (i);
 }
 
+void	print_ops(t_list *lst)
+{
+	if (!lst)
+		return ;
+	lst = lst->next;
+	while (lst && lst->content)
+	{
+		// sleep(1);
+		ft_printf("%s\n", (char *)lst->content);
+		lst = lst->next;
+	}
+	// ft_printf("%i: \033[0;31mNULL\033[0m\n", i);
+}
+
 void	print_chunks(int **chunks)
 {
 	int	i;

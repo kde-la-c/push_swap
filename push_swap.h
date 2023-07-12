@@ -61,10 +61,14 @@ int		reverse(t_list **stk);
 // sorting
 void	sort(t_info info, t_list **stka);
 // void	sort(t_info info, t_list **stka, int chunks);
-void	sort_2(t_list **stk);
-void	sort_3(t_list **stk);
+// void	sort_2(t_list **stk);
+void	sort_2(t_list **stk, t_list **stkb);
+// void	sort_3(t_list **stk);
+void	sort_3(t_list **stk, t_list **stkb);
 void	sort_5(t_info info, t_list **stka);
 void	sort_100(t_info info, t_list **stka);
 // void	sort_100(t_info info, t_list **stka, int nbchunks);
+
+void	print_ops(t_list *lst);
 
 #endif

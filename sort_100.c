@@ -19,7 +19,7 @@ int	**make_matrix(t_info info)
 	int		**chunks;
 
 	// c.i = nbchunks;
-	c.i = 3;
+	c.i = 15;
 	c.j = 0;
 	c.l = 1;
 	if (!(chunks = (int **)malloc(sizeof(int *) * (c.i + 1))))
@@ -78,24 +78,37 @@ void	push_ordered(t_list **stka, t_list **stkb)
 	t_info	a_info;
 
 	c.i = 0;
+	// sort_3(&(*stka), &(*stkb));
+	// ft_printf("1 ");
 	operation(&(*stka), &(*stkb), "pb");
 	while (*stkb)
 	{
 		a_info = fill_info(*stka);
 		if (*(int *)(*stkb)->content < a_info.smaller)
+		{
+			// ft_printf("2 ");
 			operation(&(*stka), &(*stkb), "pb");
+		}
 		else if (*(int *)(*stkb)->content > a_info.bigger)
 		{
+			// ft_printf("3 ");
 			operation(&(*stka), &(*stkb), "pb");
 			operation(&(*stka), &(*stkb), "rra");
 		}
 		else
 		{
 			while (*(int *)(*stkb)->content > *(int *)(*stka)->content)
+			{
+				// ft_printf("4 ");
 				c.i += operation(&(*stka), &(*stkb), "rra");
+			}
+			// ft_printf("5 ");
 			operation(&(*stka), &(*stkb), "pb");
 			while (c.i > 0)
+			{
+				// ft_printf("6 ");
 				c.i -= operation(&(*stka), &(*stkb), "ra");
+			}
 		}
 	}
 }
@@ -116,17 +129,21 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 
 	c.i = 0;
 	stkb = NULL;
-	while (chunks[c.i])
+	while (chunks[c.i] /* && (*info).nbargs > 3 */)
 	{
+		*info = fill_info(*stka);
 		c.j = get_closest(*stka, chunks[c.i], &(*info));
 		if (c.j != -1)
 		{
 			tmp = ft_lstgetnode(*stka, c.j);
 			while (*(int *)tmp->content != *(int *)(*stka)->content)
 				if (c.j <= (*info).nbargs / 2)
-					operation(&(*stka), NULL, "rra");
+					operation(&(*stka), &stkb, "rra");
 			else
-				operation(&(*stka), NULL, "ra");
+			{
+				// ft_printf("A ");
+				operation(&(*stka), &stkb, "ra");
+			}
 			operation(&(*stka), &stkb, "pa");
 		}
 		else

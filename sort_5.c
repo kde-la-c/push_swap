@@ -12,31 +12,30 @@
 
 #include "push_swap.h"
 
-void	sort_2(t_list **stk)
+void	sort_2(t_list **stk, t_list **stkb)
 {
 	if (!check_order(*stk))
-		operation(&(*stk), NULL, "ra");
+		operation(&(*stk), &(*stkb), "ra");
 }
 
-void	sort_3(t_list **stk)
+void	sort_3(t_list **stk, t_list **stkb)
 {
 	t_info	info;
-
 	info = fill_info(*stk);
 	if (info.nbargs == 2)
 	{
-		sort_2(&(*stk));
+		sort_2(&(*stk), &(*stkb));
 		return ;
 	}
 	if (*(int *)(*stk)->content == info.bigger)
-		operation(&(*stk), NULL, "rra");
+		operation(&(*stk), &(*stkb), "rra");
 	if (!check_order(*stk)
 		&& *(int *)ft_lstlast(*stk)->content == info.bigger)
-		operation(&(*stk), NULL, "sa");
+		operation(&(*stk), &(*stkb), "sa");
 	if (*(int *)(*stk)->next->content == info.bigger)
-		operation(&(*stk), NULL, "ra");
+		operation(&(*stk), &(*stkb), "ra");
 	if (!check_order(*stk))
-		operation(&(*stk), NULL, "sa");
+		operation(&(*stk), &(*stkb), "sa");
 }
 
 void	sort_5(t_info info, t_list **stka)
@@ -53,9 +52,9 @@ void	sort_5(t_info info, t_list **stka)
 			info.nbargs--;
 		}
 		else
-			operation(&(*stka), NULL, "ra");
+			operation(&(*stka), &stkb, "ra");
 	}
-	sort_3(&(*stka));
+	sort_3(&(*stka), &stkb);
 	while (stkb)
 	{
 		operation(&(*stka), &stkb, "pb");

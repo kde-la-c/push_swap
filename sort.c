@@ -17,6 +17,8 @@
  */
 int	check_order(t_list *stk)
 {
+	if (!stk)
+		return (1);
 	while (stk->next && *(int *)stk->content < *(int *)stk->next->content)
 		stk = stk->next;
 	if (stk->next)
