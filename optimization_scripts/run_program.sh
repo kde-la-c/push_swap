@@ -8,8 +8,9 @@ while read -r line
 do
 	len=$(echo "$line" | awk '{print NF}')
 	if (( $len > 3 )); then
+		echo $line
 		result=""
-		for (( j=0; j<=100; j++ ))
+		for (( j=5; j<=100; j+=5 ))
 		do
 			count=$(./push_swap $j $line | wc -l)
 			result+=",$count"
@@ -21,7 +22,7 @@ do
 		(( i += i/3 ));
 		echo > "out/$i.csv";
 		result=""
-		for (( j=0; j<=100; j++ ))
+		for (( j=5; j<=100; j+=5 ))
 		do
 			result+=",$j"
 			# echo -n "," >> "out/$i.csv";
