@@ -18,5 +18,8 @@ dbg*
 
 push_swap
 push_swap_visualizer
+push_swap_tester
 optimization_scripts/*
 !optimization_scripts/*.sh
+checker_Mac
+ret

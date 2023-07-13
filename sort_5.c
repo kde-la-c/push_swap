@@ -15,7 +15,7 @@
 void	sort_2(t_list **stk, t_list **stkb)
 {
 	if (!check_order(*stk))
-		operation(&(*stk), &(*stkb), "ra");
+		operation(&(*stk), NULL, "rra");
 }
 
 void	sort_3(t_list **stk, t_list **stkb)
@@ -28,12 +28,12 @@ void	sort_3(t_list **stk, t_list **stkb)
 		return ;
 	}
 	if (*(int *)(*stk)->content == info.bigger)
-		operation(&(*stk), &(*stkb), "rra");
+		operation(&(*stk), NULL, "ra");
 	if (!check_order(*stk)
 		&& *(int *)ft_lstlast(*stk)->content == info.bigger)
 		operation(&(*stk), &(*stkb), "sa");
 	if (*(int *)(*stk)->next->content == info.bigger)
-		operation(&(*stk), &(*stkb), "ra");
+		operation(&(*stk), NULL, "rra");
 	if (!check_order(*stk))
 		operation(&(*stk), &(*stkb), "sa");
 }
@@ -48,17 +48,17 @@ void	sort_5(t_info info, t_list **stka)
 		if (*(int *)(*stka)->content == info.smaller
 			|| *(int *)(*stka)->content == info.bigger)
 		{
-			operation(&(*stka), &stkb, "pa");
+			operation(&(*stka), &stkb, "pb");
 			info.nbargs--;
 		}
 		else
-			operation(&(*stka), &stkb, "ra");
+			operation(&(*stka), NULL, "rra");
 	}
 	sort_3(&(*stka), &stkb);
 	while (stkb)
 	{
-		operation(&(*stka), &stkb, "pb");
+		operation(&(*stka), &stkb, "pa");
 		if (*(int *)(*stka)->content == info.bigger)
-			operation(&(*stka), &stkb, "rra");
+			operation(&(*stka), &stkb, "ra");
 	}
 }

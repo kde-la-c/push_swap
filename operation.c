@@ -44,7 +44,7 @@ int	operation_a(t_list **stka, t_list **stkb, char *operation)
 
 	if (!ft_strncmp(operation, "sa", 3))
 		success = swap(&(*stka));
-	else if (!ft_strncmp(operation, "pa", 3) && stkb)
+	else if (!ft_strncmp(operation, "pa", 3) && stka)
 		success = push(&(*stka), &(*stkb));
 	else if (!ft_strncmp(operation, "ra", 3))
 		success = rotate(&(*stka));
@@ -63,7 +63,7 @@ int	operation_b(t_list **stka, t_list **stkb, char *operation)
 
 	if (!ft_strncmp(operation, "sb", 3))
 		success = swap(&(*stkb));
-	else if (!ft_strncmp(operation, "pb", 3) && stka)
+	else if (!ft_strncmp(operation, "pb", 3) && stkb)
 		success = push(&(*stkb), &(*stka));
 	else if (!ft_strncmp(operation, "rb", 3))
 		success = rotate(&(*stkb));
