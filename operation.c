@@ -23,17 +23,22 @@ void	output(t_list *operations)
 	tmp = operations;
 	while (tmp && tmp->next)
 	{
-		if (ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3) % 17)
+		printf("cmp[%i] :%i (%s - %s)\n", i, ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3), (char *)tmp->content, (char *)tmp->next->content);
+		if (!(ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3) % 17))
 		{
 			tmp2 = ft_lstgetnode(operations, i - 2);
 			tmp3 = ft_lstgetnode(operations, i + 1);
 			ft_lstdelone(ft_lstgetnode(operations, i - 1), NULL);
-			ft_lstdelone(tmp, NULL);
+			ft_lstdelone(ft_lstgetnode(operations, i), NULL);
 			tmp2->next = tmp3;
+			// i--;
+			tmp = ft_lstgetnode(operations, i - 1);
 		}
-		// printf("cmp[%i] :%i (%s - %s)\n", i, ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3), (char *)tmp->content, (char *)tmp->next->content);
-		tmp = tmp->next;
-		i++;
+		else
+		{
+			tmp = tmp->next;
+			i++;
+		}
 	}
 	print_ops(operations);
 }
