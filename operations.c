@@ -28,7 +28,7 @@ int	swap(t_list **stk)
 	return (0);
 }
 
-int	push(t_list **stksrc, t_list **stkdst)
+int	push(t_list **stkdst, t_list **stksrc)
 {
 	t_list	*tmp;
 
@@ -43,7 +43,7 @@ int	push(t_list **stksrc, t_list **stkdst)
 	return (0);
 }
 
-int	rotate(t_list **stk)
+int	reverse(t_list **stk)
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
@@ -61,7 +61,7 @@ int	rotate(t_list **stk)
 	return (0);
 }
 
-int	reverse(t_list **stk)
+int	rotate(t_list **stk)
 {
 	t_list	*tmp;
 
