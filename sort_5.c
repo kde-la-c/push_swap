@@ -21,7 +21,8 @@ void	sort_2(t_list **stk, t_list **stkb)
 void	sort_3(t_list **stk, t_list **stkb)
 {
 	t_info	info;
-	info = fill_info(*stk);
+
+	info = get_info(*stk);
 	if (info.nbargs == 2)
 	{
 		sort_2(&(*stk), &(*stkb));

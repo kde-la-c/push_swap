@@ -16,18 +16,15 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-// argument structure
 typedef struct s_args
 {
 	int		argc;
 	char	**argv;
 }			t_args;
 
-// information structure
 typedef struct s_info
 {
 	int		nbargs;
-	int		nbargstmp;
 	int		bigger;
 	int		smaller;
 	int		maxlen;
@@ -39,10 +36,10 @@ void	print_chunks(int **chunks);
 t_list	*fill_list(char *inp);
 
 // argument handling
-void	dlfree(t_list **lst, char **split);
+void	dlfree(t_list **lst, void **split);
 t_list	*get_arg(char *arg, t_list *ret);
 int		read_args(t_args args, t_list **stka);
-t_info	fill_info(t_list *stk);
+t_info	get_info(t_list *stk);
 int		check_order(t_list *stk);
 t_list	*get_ordinals(t_list *stka, t_info info);
 
@@ -53,22 +50,17 @@ int		push(t_list **stksrc, t_list **stkdst);
 int		rotate(t_list **stk);
 int		reverse(t_list **stk);
 
-// double operations
-// void	dswap(t_list **stka, t_list **stkb);
-// void	drotate(t_list **stka, t_list **stkb);
-// void	dreverse(t_list **stka, t_list **stkb);
-
 // sorting
-void	sort(t_info info, t_list **stka);
-// void	sort(t_info info, t_list **stka, int chunks);
-// void	sort_2(t_list **stk);
+void	sort(t_list **stka);
 void	sort_2(t_list **stk, t_list **stkb);
-// void	sort_3(t_list **stk);
 void	sort_3(t_list **stk, t_list **stkb);
 void	sort_5(t_info info, t_list **stka);
-void	sort_100(t_info info, t_list **stka);
-// void	sort_100(t_info info, t_list **stka, int nbchunks);
+void	sort_more(t_info info, t_list **stka);
 
 void	print_ops(t_list *lst);
+void	output(t_list *operations);
+
+int		**make_matrix(t_info info);
+int		get_closest(t_list *stk, int *chunk, t_info *info);
 
 #endif

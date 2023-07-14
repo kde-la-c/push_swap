@@ -22,27 +22,11 @@ int	print_list(t_list *lst, char *str)
 	i = 0;
 	while (lst && lst->content)
 	{
-		// sleep(1);
 		ft_printf("%i: \033[0;32m%d\033[0m\n", i++, *((int *)lst->content));
 		lst = lst->next;
 	}
 	ft_printf("%i: \033[0;31mNULL\033[0m\n", i);
-	// write(1, ">:cc\n", 5);
 	return (i);
-}
-
-void	print_ops(t_list *lst)
-{
-	if (!lst)
-		return ;
-	lst = lst->next;
-	while (lst && lst->content)
-	{
-		// sleep(1);
-		ft_printf("%s\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	// ft_printf("%i: \033[0;31mNULL\033[0m\n", i);
 }
 
 void	print_chunks(int **chunks)
@@ -67,11 +51,12 @@ void	print_chunks(int **chunks)
 t_list	*fill_list(char *inp)
 {
 	int		i;
-	t_list	*ret = NULL;
+	t_list	*ret;
 	void	*cont;
 	char	**split;
 
 	i = 0;
+	ret = NULL;
 	split = ft_split(inp, ' ');
 	if (!split)
 		return (NULL);
@@ -79,11 +64,11 @@ t_list	*fill_list(char *inp)
 	{
 		cont = malloc(sizeof(int));
 		if (!cont)
-			return (dlfree(&ret, split), NULL);
+			return (dlfree(&ret, (void **)split), NULL);
 		*(int *)cont = ft_atoi(split[i++]);
 		ft_lstadd_back(&ret, ft_lstnew(cont));
 	}
 	if (*split)
-		return (dlfree(NULL, split), ret);
-	return (dlfree(NULL, split), NULL);
+		return (dlfree(NULL, (void **)split), ret);
+	return (dlfree(NULL, (void **)split), NULL);
 }

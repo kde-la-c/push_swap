@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_100.c                                         :+:      :+:    :+:   */
+/*   sort_more.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kde-la-c <kde-la-c@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,113 +12,32 @@
 
 #include "push_swap.h"
 
-// int	**make_matrix(t_info info, int nbchunks)
-int	**make_matrix(t_info info)
-{	
-	t_count	c;
-	int		**chunks;
-
-	// c.i = nbchunks;
-	c.i = 6;
-	c.j = 0;
-	c.l = 1;
-	if (!(chunks = (int **)malloc(sizeof(int *) * (c.i + 1))))
-		return (NULL);
-	while (c.j < c.i)
-	{
-		c.k = info.nbargs / c.i + (c.j < info.nbargs % c.i) + 2;
-		if (!(chunks[c.j] = (int *)malloc(sizeof(int) * (c.k + 1))))
-			return (dlfree(NULL, (char **)chunks), NULL);
-		chunks[c.j][0] = c.k - 1;
-		chunks[c.j][c.k] = 0;
-		c.k = 1;
-		while (c.k <= chunks[c.j][0])
-			chunks[c.j][c.k++] = c.l++;
-		c.j++;
-	}
-	chunks[c.j] = NULL;
-	return (chunks);
-}
-
-/**
- * returns list index of closest chunk int to reach
-*/
-int	get_closest(t_list *stk, int *chunk, t_info *info)
-{
-	int		ret;
-	t_count	c;
-	int		*pos;
-
-	c.i = 0;
-	c.k = 0;
-	if (!stk || !chunk || !(pos = (int *)malloc(sizeof(int) * chunk[0] + 1)))
-		return (-1);
-	*info = fill_info(stk);
-	while (stk)
-	{
-		c.j = 1;
-		while (chunk[c.j])
-			if (!(*(int *)stk->content == chunk[c.j]))
-				c.j++;
-			else if (*(int *)stk->content == chunk[c.j++])
-				pos[c.k++] = c.i;
-		pos[c.k] = -1;
-		stk = stk->next;
-		c.i++;
-	}
-	ret = pos[0];
-	if (pos[0] != -1 && pos[0] > (*info).nbargs - pos[c.k - 1])
-		ret = pos[c.k - 1];	
-	return (free(pos), ret);
-}
-
 void	push_ordered(t_list **stka, t_list **stkb)
 {
 	t_count	c;
 	t_info	a_info;
 
 	c.i = 0;
-	// sort_3(&(*stka), &(*stkb));
-	// ft_printf("1 ");
 	operation(&(*stka), &(*stkb), "pa");
 	while (*stkb)
 	{
-		a_info = fill_info(*stka);
+		a_info = get_info(*stka);
 		if (*(int *)(*stkb)->content < a_info.smaller)
-		{
-			// ft_printf("2 ");
 			operation(&(*stka), &(*stkb), "pa");
-		}
 		else if (*(int *)(*stkb)->content > a_info.bigger)
 		{
-			// ft_printf("3 ");
 			operation(&(*stka), &(*stkb), "pa");
 			operation(&(*stka), &(*stkb), "ra");
 		}
 		else
 		{
 			while (*(int *)(*stkb)->content > *(int *)(*stka)->content)
-			{
-				// ft_printf("4 ");
 				c.i += operation(&(*stka), &(*stkb), "ra");
-			}
-			// ft_printf("5 ");
 			operation(&(*stka), &(*stkb), "pa");
 			while (c.i > 0)
-			{
-				// ft_printf("6 ");
 				c.i -= operation(&(*stka), &(*stkb), "rra");
-			}
 		}
 	}
-}
-
-int	isnb(int *arr, int nb)
-{
-	while (*arr)
-		if (nb == *(arr++))
-			return (1);
-	return (0);
 }
 
 void	push_chunks(t_list **stka, int **chunks, t_info *info)
@@ -129,9 +48,9 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 
 	c.i = 0;
 	stkb = NULL;
-	while (chunks[c.i] /* && (*info).nbargs > 3 */)
+	while (chunks[c.i])
 	{
-		*info = fill_info(*stka);
+		*info = get_info(*stka);
 		c.j = get_closest(*stka, chunks[c.i], &(*info));
 		if (c.j != -1)
 		{
@@ -140,10 +59,7 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 				if (c.j <= (*info).nbargs / 2)
 					operation(&(*stka), &stkb, "ra");
 			else
-			{
-				// ft_printf("A ");
 				operation(&(*stka), &stkb, "rra");
-			}
 			operation(&(*stka), &stkb, "pb");
 		}
 		else
@@ -153,17 +69,11 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 	ft_lstclear(&stkb, free);
 }
 
-// void	sort_100(t_info info, t_list **stka, int nbchunks)
-void	sort_100(t_info info, t_list **stka)
+void	sort_more(t_info info, t_list **stka)
 {
 	int		**chunks;
 
-	// chunks = make_matrix(info, nbchunks);
 	chunks = make_matrix(info);
-	// print_chunks(chunks);
-	// ft_printf("rand chunk bit :%i\n", chunks[1][0]);
 	push_chunks(&(*stka), chunks, &info);
-	// print_chunks(chunks);
 	ft_dfree((void **)chunks);
-	// ft_printf("nbch :%i\n", nbchunks);
 }

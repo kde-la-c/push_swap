@@ -12,45 +12,6 @@
 
 #include "push_swap.h"
 
-void	output(t_list *operations)
-{
-	int		i;
-	// int		j = 0;
-	int		diff;
-	t_list	*tmp;
-	t_list	*node;
-	// char *op;
-
-	i = 0;
-	tmp = operations;
-	while (tmp && tmp->next)
-	{
-		diff = ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3);
-		// printf("[%i]:	%s - %s :	%i\n", i, (char *)tmp->content, (char *)tmp->next->content, diff);
-		if (diff == 1 || diff == 17)
-		{
-			node = ft_lstgetnode(operations, i - 1);
-			// op = (char *)node->next->content;
-			ft_lstdelnext(&node, NULL);
-			// node = NULL;
-			node = ft_lstgetnode(operations, i - 1);
-			// op = NULL;
-			// op = (char *)node->next->content;
-			ft_lstdelnext(&node, NULL);
-			// j++;
-			tmp = operations;
-			i = 0;
-		}
-		else
-		{
-			tmp = tmp->next;
-			i++;
-		}
-	}
-	print_ops(operations);
-	// ft_printf("J :%i\n", j);
-}
-
 int	operation_a(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
@@ -66,7 +27,7 @@ int	operation_a(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		return (/* ft_printf("%s\n", operation), */ 1);
+		return (1);
 	return (0);
 }
 
@@ -85,7 +46,7 @@ int	operation_b(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success)
-		return (/* ft_printf("%s\n", operation), */ 1);
+		return (1);
 	return (0);
 }
 
@@ -111,48 +72,37 @@ int	operation_ab(t_list **stka, t_list **stkb, char *operation)
 	else
 		success = 0;
 	if (success == 2)
-		return (/* ft_printf("%s\n", operation), */ 1);
+		return (1);
 	return (0);
 }
 
 int	operation(t_list **stka, t_list **stkb, char *operation)
 {
-	int	ret;
-	static t_list	*operations;
+	int				ret;
+	static t_list	*oplst;
 
-	if (!operations)
-		operations = ft_lstnew(ft_strdup("depart"));
 	if (ft_strchr(operation, 'a'))
 	{
 		ret = operation_a(&(*stka), &(*stkb), operation);
 		if (ret)
-			ft_lstadd_back(&operations, ft_lstnew((void *)operation));
+			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
 	}
 	else if (ft_strchr(operation, 'b'))
 	{
-		ret =operation_b(&(*stka), &(*stkb), operation);
+		ret = operation_b(&(*stka), &(*stkb), operation);
 		if (ret)
-			ft_lstadd_back(&operations, ft_lstnew((void *)operation));
+			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
 	}
 	else
 	{
 		ret = operation_ab(&(*stka), &(*stkb), operation);
 		if (ret)
-			ft_lstadd_back(&operations, ft_lstnew((void *)operation));
+			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
 	}
 	if (check_order(*stka) && !ft_lstsize(*stkb))
 	{
-		output(operations);
+		output(oplst);
+		ft_lstclear(&oplst, NULL);
 	}
 	return (ret);
 }
-
-/* int	operation(t_list **stka, t_list **stkb, char *operation)
-{
-	if (ft_strchr(operation, 'a'))
-		return (operation_a(&(*stka), &(*stkb), operation));
-	else if (ft_strchr(operation, 'b'))
-		return (operation_b(&(*stka), &(*stkb), operation));
-	else
-		return (operation_ab(&(*stka), &(*stkb), operation));
-} */

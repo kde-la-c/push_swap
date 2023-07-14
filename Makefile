@@ -19,8 +19,10 @@ SRC			= push_swap.c\
 			operation.c\
 			sort.c\
 			sort_5.c\
-			sort_100.c\
+			sort_more.c\
 			get_info.c\
+			output.c\
+			sort_more_utils.c\
 			\
 			test_utils.c
 OBJS		= $(SRC:%.c=%.o)
@@ -37,7 +39,6 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
-	$(RM) $(RFLAGS) $(OBJS)
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 l:			$(OBJS) $(INCLUDE) $(LIBNAME)
@@ -70,4 +71,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re debug
+.PHONY:		all clean fclean re debug l m

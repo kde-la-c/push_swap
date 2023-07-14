@@ -26,14 +26,15 @@ int	check_order(t_list *stk)
 	return (1);
 }
 
-// void	sort(t_info info, t_list **stka, int chunks)
-void	sort(t_info info, t_list **stka)
+void	sort(t_list **stka)
 {
+	t_info info;
+
+	info = get_info(*stka);
 	if (check_order(*stka))
 		return ;
 	else if (info.nbargs <= 5)
 		sort_5(info, &(*stka));
 	else
-		// sort_100(info, &(*stka), chunks);
-		sort_100(info, &(*stka));
+		sort_more(info, &(*stka));
 }

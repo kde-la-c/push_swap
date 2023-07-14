@@ -35,7 +35,7 @@ void	get_order(int *ord, t_list *stka, t_info info)
 	{
 		tmp = stka;
 		i = 0;
-		info = fill_info(stka);
+		info = get_info(stka);
 		while (tmp && *(int *)tmp->content != info.smaller)
 		{
 			tmp = tmp->next;

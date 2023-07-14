@@ -38,12 +38,11 @@ void	get_extremes(t_info *info, t_list *stk)
 	free(str);
 }
 
-t_info	fill_info(t_list *stk)
+t_info	get_info(t_list *stk)
 {
 	t_info	ret;
 
 	get_extremes(&ret, stk);
 	ret.nbargs = ft_lstsize(stk);
-	ret.nbargstmp = ret.nbargs;
 	return (ret);
 }
