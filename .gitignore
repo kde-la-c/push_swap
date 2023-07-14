@@ -14,6 +14,7 @@ a.out
 .DS_Store
 *.o
 *.a
+*.dSYM
 dbg*
 
 push_swap
@@ -22,4 +23,5 @@ push_swap_tester
 optimization_scripts/*
 !optimization_scripts/*.sh
 checker_Mac
+checker_linux
 ret

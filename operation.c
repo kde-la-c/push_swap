@@ -15,24 +15,31 @@
 void	output(t_list *operations)
 {
 	int		i;
+	// int		j = 0;
+	int		diff;
 	t_list	*tmp;
-	t_list	*tmp2;
-	t_list	*tmp3;
+	t_list	*node;
+	// char *op;
 
 	i = 0;
 	tmp = operations;
 	while (tmp && tmp->next)
 	{
-		printf("cmp[%i] :%i (%s - %s)\n", i, ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3), (char *)tmp->content, (char *)tmp->next->content);
-		if (!(ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3) % 17))
+		diff = ft_strncmp((char *)tmp->content, (char *)tmp->next->content, 3);
+		// printf("[%i]:	%s - %s :	%i\n", i, (char *)tmp->content, (char *)tmp->next->content, diff);
+		if (diff == 1 || diff == 17)
 		{
-			tmp2 = ft_lstgetnode(operations, i - 2);
-			tmp3 = ft_lstgetnode(operations, i + 1);
-			ft_lstdelone(ft_lstgetnode(operations, i - 1), NULL);
-			ft_lstdelone(ft_lstgetnode(operations, i), NULL);
-			tmp2->next = tmp3;
-			// i--;
-			tmp = ft_lstgetnode(operations, i - 1);
+			node = ft_lstgetnode(operations, i - 1);
+			// op = (char *)node->next->content;
+			ft_lstdelnext(&node, NULL);
+			// node = NULL;
+			node = ft_lstgetnode(operations, i - 1);
+			// op = NULL;
+			// op = (char *)node->next->content;
+			ft_lstdelnext(&node, NULL);
+			// j++;
+			tmp = operations;
+			i = 0;
 		}
 		else
 		{
@@ -41,6 +48,7 @@ void	output(t_list *operations)
 		}
 	}
 	print_ops(operations);
+	// ft_printf("J :%i\n", j);
 }
 
 int	operation_a(t_list **stka, t_list **stkb, char *operation)
@@ -132,10 +140,8 @@ int	operation(t_list **stka, t_list **stkb, char *operation)
 		if (ret)
 			ft_lstadd_back(&operations, ft_lstnew((void *)operation));
 	}
-	// ft_printf("debug %i\n", ft_lstsize(*stkb));
 	if (check_order(*stka) && !ft_lstsize(*stkb))
 	{
-		// ft_printf("DONE ! B)\n");
 		output(operations);
 	}
 	return (ret);

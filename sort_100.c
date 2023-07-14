@@ -19,7 +19,7 @@ int	**make_matrix(t_info info)
 	int		**chunks;
 
 	// c.i = nbchunks;
-	c.i = 30;
+	c.i = 6;
 	c.j = 0;
 	c.l = 1;
 	if (!(chunks = (int **)malloc(sizeof(int *) * (c.i + 1))))

@@ -70,5 +70,6 @@ void	sort_100(t_info info, t_list **stka);
 // void	sort_100(t_info info, t_list **stka, int nbchunks);
 
 void	print_ops(t_list *lst);
+void	ft_lstdelnext(t_list **lst, void (*del)(void *));
 
 #endif
