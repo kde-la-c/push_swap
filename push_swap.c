@@ -21,7 +21,8 @@ int	main(int argc, char **argv)
 	args.argv = argv;
 	stka = NULL;
 	read_args(args, &stka);
-	sort(&stka);
+	if (!check_order(stka))
+		sort(&stka);
 	dlfree(&stka, NULL);
 	return (0);
 }

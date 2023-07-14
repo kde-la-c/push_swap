@@ -27,6 +27,8 @@ int	isnbrep(t_list *stk)
 
 	c.i = 0;
 	set = (int *)malloc(sizeof(int) * ft_lstsize(stk));
+	if (!set)
+		return (-1);
 	set[0] = *(int *)stk->content;
 	while (stk)
 	{

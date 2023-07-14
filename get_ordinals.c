@@ -54,6 +54,8 @@ t_list	*get_ordinals(t_list *stka, t_info info)
 
 	i = 0;
 	ord = (int *)malloc(sizeof(int) * info.nbargs);
+	if (!ord)
+		return (NULL);
 	get_order(ord, stka, info);
 	tmp = stka;
 	while (tmp)

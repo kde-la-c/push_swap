@@ -74,6 +74,8 @@ void	sort_more(t_info info, t_list **stka)
 	int		**chunks;
 
 	chunks = make_matrix(info);
+	if (!chunks)
+		return ;
 	push_chunks(&(*stka), chunks, &info);
 	ft_dfree((void **)chunks);
 }
