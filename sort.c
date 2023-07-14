@@ -28,7 +28,7 @@ int	check_order(t_list *stk)
 
 void	sort(t_list **stka)
 {
-	t_info info;
+	t_info	info;
 
 	info = get_info(*stka);
 	if (check_order(*stka))

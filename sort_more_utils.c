@@ -80,10 +80,8 @@ int	get_closest(t_list *stk, int *chunk, t_info *info)
 	{
 		c.j = 1;
 		while (chunk[c.j])
-			if (!(*(int *)stk->content == chunk[c.j]))
-				c.j++;
-		else if (*(int *)stk->content == chunk[c.j++])
-			pos[c.k++] = c.i;
+			if (*(int *)stk->content == chunk[c.j++])
+				pos[c.k++] = c.i;
 		pos[c.k] = -1;
 		stk = stk->next;
 		c.i++;

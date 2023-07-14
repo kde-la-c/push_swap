@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	operation_a(t_list **stka, t_list **stkb, char *operation)
+int	operation_1(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
 
@@ -24,18 +24,7 @@ int	operation_a(t_list **stka, t_list **stkb, char *operation)
 		success = rotate(&(*stka));
 	else if (!ft_strncmp(operation, "rra", 3))
 		success = reverse(&(*stka));
-	else
-		success = 0;
-	if (success)
-		return (1);
-	return (0);
-}
-
-int	operation_b(t_list **stka, t_list **stkb, char *operation)
-{
-	int	success;
-
-	if (!ft_strncmp(operation, "sb", 3))
+	else if (!ft_strncmp(operation, "sb", 3))
 		success = swap(&(*stkb));
 	else if (!ft_strncmp(operation, "pb", 3) && stkb)
 		success = push(&(*stkb), &(*stka));
@@ -50,7 +39,7 @@ int	operation_b(t_list **stka, t_list **stkb, char *operation)
 	return (0);
 }
 
-int	operation_ab(t_list **stka, t_list **stkb, char *operation)
+int	operation_2(t_list **stka, t_list **stkb, char *operation)
 {
 	int	success;
 
@@ -81,21 +70,15 @@ int	operation(t_list **stka, t_list **stkb, char *operation)
 	int				ret;
 	static t_list	*oplst;
 
-	if (ft_strchr(operation, 'a'))
+	if (ft_strchr(operation, 'a') || ft_strchr(operation, 'b'))
 	{
-		ret = operation_a(&(*stka), &(*stkb), operation);
-		if (ret)
-			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
-	}
-	else if (ft_strchr(operation, 'b'))
-	{
-		ret = operation_b(&(*stka), &(*stkb), operation);
+		ret = operation_1(&(*stka), &(*stkb), operation);
 		if (ret)
 			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
 	}
 	else
 	{
-		ret = operation_ab(&(*stka), &(*stkb), operation);
+		ret = operation_2(&(*stka), &(*stkb), operation);
 		if (ret)
 			ft_lstadd_back(&oplst, ft_lstnew((void *)operation));
 	}
