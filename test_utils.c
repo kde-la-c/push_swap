@@ -12,17 +12,6 @@
 
 #include "push_swap.h"
 
-void	ft_lstdelnext(t_list **lst, void (*del)(void *))
-{
-	t_list	*tmp;
-
-	if (!lst || !*lst || !(*lst)->next)
-		return ;
-	tmp = (*lst)->next->next;
-	ft_lstdelone((*lst)->next, del);
-	(*lst)->next = tmp;
-}
-
 int	print_list(t_list *lst, char *str)
 {
 	int	i;
