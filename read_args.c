@@ -73,25 +73,28 @@ t_list	*get_arg(char *arg, t_list *ret)
 	return (dlfree(NULL, (void **)split), NULL);
 }
 
-int	read_args(t_args args, t_list **stka)
+void	read_args(t_args args, t_list **stka)
 {
 	int		i;
+	t_info	info;
 	t_list	*tmp;
 
 	i = 1;
 	tmp = NULL;
 	if (args.argc == 1)
-		return (ft_printf("%s\n", args.argv[0]), 0);
+		ft_printf("%s\n", args.argv[0]);
 	else if (args.argc > 1)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
 		*stka = get_ordinals(*stka, get_info(*stka));
-		if (*stka && !isnbrep(*stka))
-			return (1);
-		else
-			return (dlfree(&(*stka), NULL), ft_printf("Error\n"), 0);
+		info = get_info(*stka);
+		if (!(info.nbargs > 1 && !isnbrep(*stka)))
+		{
+			dlfree(&(*stka), NULL);
+			print_error();
+		}
 	}
 	else
-		return (ft_printf("Error\n"), 0);
+		print_error();
 }
