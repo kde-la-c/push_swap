@@ -19,7 +19,6 @@ int	main(int argc, char **argv)
 
 	args.argc = argc;
 	args.argv = argv;
-	stka = NULL;
 	read_args(args, &stka);
 	if (!check_order(stka))
 		sort(&stka);

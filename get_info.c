@@ -16,7 +16,6 @@ void	get_extremes(t_info *info, t_list *stk)
 {
 	int		i;
 	int		j;
-	char	*str;
 
 	i = -2147483648;
 	j = 2147483647;
@@ -30,12 +29,6 @@ void	get_extremes(t_info *info, t_list *stk)
 	}
 	(*info).bigger = i;
 	(*info).smaller = j;
-	if (j < 0 && (j * -1) > i)
-		str = ft_itoa(j * -1);
-	else
-		str = ft_itoa(i);
-	(*info).maxlen = ft_strlen(str);
-	free(str);
 }
 
 t_info	get_info(t_list *stk)

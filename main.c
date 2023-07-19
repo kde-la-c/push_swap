@@ -14,5 +14,14 @@
 
 int	main(void)
 {
+	char *max = "2147483647";
+	char *min = "-2147483648";
+	char *nb = "-2147483648";
+
+	if ((nb[0] == '-' && ft_strlen(nb) > 10 && ft_strncmp(nb, min, 11) > 0)
+		|| (ft_isdigit(nb[0]) && ft_strlen(nb) > 9 && ft_strncmp(nb, max, 11) > 0))
+		printf("Error\n");
+	else
+		printf("Lezgo\n");
 	return (0);
 }

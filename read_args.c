@@ -26,9 +26,11 @@ int	isnbrep(t_list *stk)
 	int		*set;
 
 	c.i = 0;
+	if (!stk)
+		return (0);
 	set = (int *)malloc(sizeof(int) * ft_lstsize(stk));
 	if (!set)
-		return (-1);
+		print_error();
 	set[0] = *(int *)stk->content;
 	while (stk)
 	{
@@ -40,31 +42,47 @@ int	isnbrep(t_list *stk)
 		stk = stk->next;
 		c.i++;
 	}
-	free(set);
-	return (0);
+	return (free(set), 0);
+}
+
+int	check_arg(char *nb)
+{
+	t_count	c;
+	char	*max = "2147483647";
+	char	*min = "-2147483648";
+
+	c.i = 0;
+	if ((nb[0] == '-' && ft_strlen(nb) > 10 && ft_strncmp(nb, min, 11) > 0)
+		|| (ft_strlen(nb) > 9 && ft_strncmp(nb, max, 11) > 0)
+		|| !nb)
+		return (0);
+	while (nb && nb[c.i])
+	{
+		if (!(ft_isdigit(nb[c.i])
+			|| (!c.i && nb[c.i] == '-' && nb[c.i + 1])))
+			return (0);
+		c.i++;
+	}
+	return (1);
 }
 
 t_list	*get_arg(char *arg, t_list *ret)
 {
 	int		i;
-	int		j;
 	void	*cont;
 	char	**split;
 
 	i = 0;
 	split = ft_split(arg, ' ');
 	if (!split)
-		return (NULL);
+		print_error();
 	while (split[i])
 	{
-		j = -1;
-		while (split[i] && split[i][++j])
-			if (!(ft_isdigit(split[i][j])
-				|| (!j && split[i][j] == '-' && split[i][j + 1])))
-				return (dlfree(&ret, (void **)split), NULL);
+		if (!check_arg(split[i]))
+			print_error();
 		cont = malloc(sizeof(int));
 		if (!cont)
-			return (dlfree(&ret, (void **)split), NULL);
+			print_error();
 		*(int *)cont = ft_atoi(split[i++]);
 		ft_lstadd_back(&ret, ft_lstnew(cont));
 	}
@@ -82,18 +100,15 @@ void	read_args(t_args args, t_list **stka)
 	i = 1;
 	tmp = NULL;
 	if (args.argc == 1)
-		ft_printf("%s\n", args.argv[0]);
+		return ;
 	else if (args.argc > 1)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
+		if (isnbrep(*stka) == 1)
+			print_error();
 		*stka = get_ordinals(*stka, get_info(*stka));
 		info = get_info(*stka);
-		if (!(info.nbargs > 1 && !isnbrep(*stka)))
-		{
-			dlfree(&(*stka), NULL);
-			print_error();
-		}
 	}
 	else
 		print_error();

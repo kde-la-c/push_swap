@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /**
- * returns 1 is list is ordered
+ * returns 1 if list is ordered
  */
 int	check_order(t_list *stk)
 {
@@ -31,9 +31,7 @@ void	sort(t_list **stka)
 	t_info	info;
 
 	info = get_info(*stka);
-	if (check_order(*stka))
-		return ;
-	else if (info.nbargs <= 5)
+	if (info.nbargs <= 5)
 		sort_5(info, &(*stka));
 	else
 		sort_more(info, &(*stka));

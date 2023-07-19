@@ -24,10 +24,9 @@ typedef struct s_args
 
 typedef struct s_info
 {
-	int		nbargs;
-	int		bigger;
-	int		smaller;
-	int		maxlen;
+	unsigned int	nbargs;
+	int				bigger;
+	int				smaller;
 }			t_info;
 
 // testing
@@ -51,7 +50,7 @@ int		reverse(t_list **stk);
 // sorting
 t_info	get_info(t_list *stk);
 int		**make_matrix(t_info info);
-int		get_closest(t_list *stk, int *chunk, t_info *info);
+long	get_closest(t_list *stk, int *chunk, t_info *info);
 void	sort(t_list **stka);
 void	sort_2(t_list **stk, t_list **stkb);
 void	sort_3(t_list **stk, t_list **stkb);
@@ -64,5 +63,7 @@ void	output(t_list *operations);
 void	print_error(void);
 
 void	dlfree(t_list **lst, void **split);
+
+int	isnbrep(t_list *stk);
 
 #endif
