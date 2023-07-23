@@ -64,6 +64,4 @@ void	print_error(void);
 
 void	dlfree(t_list **lst, void **split);
 
-int	isnbrep(t_list *stk);
-
 #endif

@@ -48,18 +48,17 @@ int	isnbrep(t_list *stk)
 int	check_arg(char *nb)
 {
 	t_count	c;
-	char	*max = "2147483647";
-	char	*min = "-2147483648";
+	int		max;
+	int		min;
 
+	max = 2147483647;
+	min = -2147483648;
 	c.i = 0;
-	if ((nb[0] == '-' && ft_strlen(nb) > 10 && ft_strncmp(nb, min, 11) > 0)
-		|| (ft_strlen(nb) > 9 && ft_strncmp(nb, max, 11) > 0)
-		|| !nb)
+	if (ft_strlen(nb) > (9 + (nb[0] == '-')) && (ft_atol(nb) > max || ft_atol(nb) < min))
 		return (0);
 	while (nb && nb[c.i])
 	{
-		if (!(ft_isdigit(nb[c.i])
-			|| (!c.i && nb[c.i] == '-' && nb[c.i + 1])))
+		if (!(ft_isdigit(nb[c.i]) || (!c.i && nb[c.i] == '-' && nb[c.i + 1])))
 			return (0);
 		c.i++;
 	}
