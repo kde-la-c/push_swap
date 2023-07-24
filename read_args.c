@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void	dlfree(t_list **lst, char **split)
+void	dlfree(t_list **lst, void **split)
 {
 	if (split)
-		ft_dfree((void **)split);
+		ft_dfree(split);
 	if (lst && *lst)
 		ft_lstclear(&(*lst), free);
 }
@@ -26,7 +26,11 @@ int	isnbrep(t_list *stk)
 	int		*set;
 
 	c.i = 0;
+	if (!stk)
+		return (0);
 	set = (int *)malloc(sizeof(int) * ft_lstsize(stk));
+	if (!set)
+		print_error();
 	set[0] = *(int *)stk->content;
 	while (stk)
 	{
@@ -38,61 +42,73 @@ int	isnbrep(t_list *stk)
 		stk = stk->next;
 		c.i++;
 	}
-	free(set);
-	return (0);
+	return (free(set), 0);
+}
+
+int	check_arg(char *nb)
+{
+	t_count	c;
+	int		max;
+	int		min;
+
+	max = 2147483647;
+	min = -2147483648;
+	c.i = 0;
+	if (ft_strlen(nb) > (9 + (nb[0] == '-')) && (ft_atol(nb) > max || ft_atol(nb) < min))
+		return (0);
+	while (nb && nb[c.i])
+	{
+		if (!(ft_isdigit(nb[c.i]) || (!c.i && nb[c.i] == '-' && nb[c.i + 1])))
+			return (0);
+		c.i++;
+	}
+	return (1);
 }
 
 t_list	*get_arg(char *arg, t_list *ret)
 {
 	int		i;
-	int		j;
 	void	*cont;
 	char	**split;
 
 	i = 0;
 	split = ft_split(arg, ' ');
 	if (!split)
-		return (NULL);
+		print_error();
 	while (split[i])
 	{
-		j = -1;
-		while (split[i] && split[i][++j])
-			if (!(ft_isdigit(split[i][j])
-				|| (!j && split[i][j] == '-' && split[i][j + 1])))
-				return (dlfree(&ret, split), NULL);
+		if (!check_arg(split[i]))
+			print_error();
 		cont = malloc(sizeof(int));
 		if (!cont)
-			return (dlfree(&ret, split), NULL);
+			print_error();
 		*(int *)cont = ft_atoi(split[i++]);
 		ft_lstadd_back(&ret, ft_lstnew(cont));
 	}
 	if (*split)
-		return (dlfree(NULL, split), ret);
-	return (dlfree(NULL, split), NULL);
+		return (dlfree(NULL, (void **)split), ret);
+	return (dlfree(NULL, (void **)split), NULL);
 }
 
-int	read_args(t_args args, t_list **stka)
+void	read_args(t_args args, t_list **stka)
 {
 	int		i;
+	t_info	info;
 	t_list	*tmp;
 
-	// i = 2;
 	i = 1;
 	tmp = NULL;
-	// if (args.argc == 2)
 	if (args.argc == 1)
-		return (ft_printf("%s\n", args.argv[0]), 0);
-	// else if (args.argc > 2)
+		return ;
 	else if (args.argc > 1)
 	{
 		while (args.argv[i])
 			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
-		*stka = get_ordinals(*stka, fill_info(*stka));
-		if (*stka && !isnbrep(*stka))
-			return (1);
-		else
-			return (dlfree(&(*stka), NULL), ft_printf("Error\n"), 0);
+		if (isnbrep(*stka) == 1)
+			print_error();
+		*stka = get_ordinals(*stka, get_info(*stka));
+		info = get_info(*stka);
 	}
 	else
-		return (ft_printf("Error\n"), 0);
+		print_error();
 }

@@ -14,6 +14,7 @@ a.out
 .DS_Store
 *.o
 *.a
+*.dSYM
 dbg*
 *.dSYM
 

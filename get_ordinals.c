@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_list	*get_node(t_list *lst, int index)
+/* t_list	*get_node(t_list *lst, int index)
 {
 	if (ft_lstsize(lst) < index)
 		return (NULL);
@@ -22,43 +22,45 @@ t_list	*get_node(t_list *lst, int index)
 		index--;
 	}
 	return (lst);
-}
+} */
 
-void	get_order(int *ord, t_list *stka, t_info info)
+void	get_order(unsigned int *ord, t_list *stka, t_info info)
 {
-	int		i;
-	long	ordinal;
-	t_list	*tmp;
+	t_count			c;
+	unsigned int	ordinal;
+	t_list			*tmp;
 
 	ordinal = 1;
 	while (ordinal <= info.nbargs)
 	{
 		tmp = stka;
-		i = 0;
-		info = fill_info(stka);
+		c.i = 0;
+		info = get_info(stka);
 		while (tmp && *(int *)tmp->content != info.smaller)
 		{
 			tmp = tmp->next;
-			i++;
+			c.i++;
 		}
 		*(int *)tmp->content = INT32_MAX;
-		ord[i] = ordinal++;
+		ord[c.i] = ordinal++;
 	}
 }
 
 t_list	*get_ordinals(t_list *stka, t_info info)
 {
-	int		i;
-	t_list	*tmp;
-	int		*ord;
+	t_count			c;
+	t_list			*tmp;
+	unsigned int	*ord;
 
-	i = 0;
-	ord = (int *)malloc(sizeof(int) * info.nbargs);
+	c.i = 0;
+	ord = (unsigned int *)malloc(sizeof(unsigned int) * info.nbargs);
+	if (!ord)
+		return (NULL);
 	get_order(ord, stka, info);
 	tmp = stka;
 	while (tmp)
 	{
-		*(int *)tmp->content = ord[i++];
+		*(unsigned int *)tmp->content = ord[c.i++];
 		tmp = tmp->next;
 	}
 	return (free(ord), stka);

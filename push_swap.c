@@ -15,21 +15,13 @@
 int	main(int argc, char **argv)
 {
 	t_args	args;
-	t_info	info;
 	t_list	*stka;
 
 	args.argc = argc;
 	args.argv = argv;
-	stka = NULL;
 	read_args(args, &stka);
-	info = fill_info(stka);
-	if (stka)
-	{
-		// print_list(stka, "a");
-		// sort(info, &stka, ft_atoi(argv[1]));
-		sort(info, &stka);
-		// print_list(stka, "finished");
-		dlfree(&stka, NULL);
-	}
+	if (!check_order(stka))
+		sort(&stka);
+	dlfree(&stka, NULL);
 	return (0);
 }
