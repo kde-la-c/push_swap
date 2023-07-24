@@ -65,33 +65,33 @@ int	operation_2(t_list **stka, t_list **stkb, char *operation)
 	return (0);
 }
 
+void	add_op(int ret, char *operation, t_list **oplst)
+{
+	t_list	*node;
+
+	if (ret)
+	{
+		node = ft_lstnew((void *)operation);
+		if (!node)
+			print_error();
+		ft_lstadd_back(&(*oplst), node);
+	}
+}
+
 int	operation(t_list **stka, t_list **stkb, char *operation)
 {
 	int				ret;
-	t_list			*node;
 	static t_list	*oplst;
 
 	if (ft_strchr(operation, 'a') || ft_strchr(operation, 'b'))
 	{
 		ret = operation_1(&(*stka), &(*stkb), operation);
-		if (ret)
-		{
-			node = ft_lstnew((void *)operation);
-			if (!node)
-				print_error();
-			ft_lstadd_back(&oplst, node);
-		}
+		add_op(ret, operation, &oplst);
 	}
 	else
 	{
 		ret = operation_2(&(*stka), &(*stkb), operation);
-		if (ret)
-		{
-			node = ft_lstnew((void *)operation);
-			if (!node)
-				print_error();
-			ft_lstadd_back(&oplst, node);
-		}
+		add_op(ret, operation, &oplst);
 	}
 	if (check_order(*stka) && !ft_lstsize(*stkb))
 	{

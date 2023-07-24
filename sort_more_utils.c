@@ -71,9 +71,9 @@ long	get_closest(t_list *stk, int *chunk, t_info *info)
 	c.i = 0;
 	c.k = 0;
 	pos = (long *)malloc(sizeof(long) * chunk[0]);
-	if (!pos || !stk)
+	if (!pos)
 		print_error();
-	if (/* !stk || */ !chunk)
+	if (!stk || !chunk)
 		return (free(pos), -1);
 	while (stk)
 	{

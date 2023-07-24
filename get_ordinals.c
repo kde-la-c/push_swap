@@ -43,7 +43,7 @@ t_list	*get_ordinals(t_list *stka, t_info info)
 	c.i = 0;
 	ord = (unsigned int *)malloc(sizeof(unsigned int) * info.nbargs);
 	if (!ord)
-		return (NULL);
+		print_error();
 	get_order(ord, stka, info);
 	tmp = stka;
 	while (tmp)
