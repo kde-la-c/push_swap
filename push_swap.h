@@ -30,7 +30,7 @@ t_list	*fill_list(char *inp);
 
 // parsing
 int		check_order(t_list *stk);
-t_list	*get_arg(char *arg, t_list *ret);
+t_list	*get_arg(char *arg);
 void	read_args(t_args args, t_list **stka);
 t_list	*get_ordinals(t_list *stka, t_info info);
 

@@ -66,7 +66,6 @@ void	push_chunks(t_list **stka, int **chunks, t_info *info)
 			c.i++;
 	}
 	push_ordered(&(*stka), &stkb);
-	ft_lstclear(&stkb, free);
 }
 
 void	sort_more(t_info info, t_list **stka)

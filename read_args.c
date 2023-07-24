@@ -54,7 +54,8 @@ int	check_arg(char *nb)
 	max = 2147483647;
 	min = -2147483648;
 	c.i = 0;
-	if (ft_strlen(nb) > (9 + (nb[0] == '-')) && (ft_atol(nb) > max || ft_atol(nb) < min))
+	if (ft_strlen(nb) > (9 + (nb[0] == '-'))
+		&& (ft_atol(nb) > max || ft_atol(nb) < min))
 		return (0);
 	while (nb && nb[c.i])
 	{
@@ -65,13 +66,17 @@ int	check_arg(char *nb)
 	return (1);
 }
 
-t_list	*get_arg(char *arg, t_list *ret)
+// t_list	*get_arg(char *arg, t_list *ret)
+t_list	*get_arg(char *arg)
 {
 	int		i;
 	void	*cont;
+	t_list	*node;
+	t_list	*ret;
 	char	**split;
 
 	i = 0;
+	ret = NULL;
 	split = ft_split(arg, ' ');
 	if (!split)
 		print_error();
@@ -79,21 +84,21 @@ t_list	*get_arg(char *arg, t_list *ret)
 	{
 		if (!check_arg(split[i]))
 			print_error();
-		cont = malloc(sizeof(int));
+		cont = (void *)malloc(sizeof(int) * 1);
 		if (!cont)
 			print_error();
 		*(int *)cont = ft_atoi(split[i++]);
-		ft_lstadd_back(&ret, ft_lstnew(cont));
+		node = ft_lstnew(cont);
+		if (!node)
+			print_error();
+		ft_lstadd_back(&ret, node);
 	}
-	if (*split)
-		return (dlfree(NULL, (void **)split), ret);
-	return (dlfree(NULL, (void **)split), NULL);
+	return (dlfree(NULL, (void **)split), ret);
 }
 
 void	read_args(t_args args, t_list **stka)
 {
 	int		i;
-	t_info	info;
 	t_list	*tmp;
 
 	i = 1;
@@ -103,11 +108,15 @@ void	read_args(t_args args, t_list **stka)
 	else if (args.argc > 1)
 	{
 		while (args.argv[i])
-			ft_lstadd_back(&(*stka), get_arg(args.argv[i++], tmp));
+		{
+			tmp = get_arg(args.argv[i++]);
+			if (!tmp)
+				print_error();
+			ft_lstadd_back(&(*stka), tmp);
+		}
 		if (isnbrep(*stka) == 1)
 			print_error();
 		*stka = get_ordinals(*stka, get_info(*stka));
-		info = get_info(*stka);
 	}
 	else
 		print_error();

@@ -12,21 +12,21 @@
 
 #include "push_swap.h"
 
-#ifndef MALLOC_NB
-# define MALLOC_NB 5
+#ifndef MALLOC_FAIL
+# define MALLOC_FAIL 41
 #endif
 
 void	*malloc(size_t size)
 {
 	static int i = 0;
 
-	if (i == MALLOC_NB)
+	if (i == MALLOC_FAIL)
 		return (NULL);
 	i++;
 	return (calloc(size, 1));
 }
 
-void	leakss()
+void	leaks()
 {
 	system("leaks push_swap");
 }
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	t_args	args;
 	t_list	*stka;
 
-	atexit(leakss);
+	atexit(leaks);
 	args.argc = argc;
 	args.argv = argv;
 	read_args(args, &stka);

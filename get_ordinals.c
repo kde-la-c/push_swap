@@ -12,18 +12,6 @@
 
 #include "push_swap.h"
 
-/* t_list	*get_node(t_list *lst, int index)
-{
-	if (ft_lstsize(lst) < index)
-		return (NULL);
-	while (lst && index >= 0)
-	{
-		lst = lst->next;
-		index--;
-	}
-	return (lst);
-} */
-
 void	get_order(unsigned int *ord, t_list *stka, t_info info)
 {
 	t_count			c;
