@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	main(void)
+/* int	main(void)
 {
 	char *max = "2147483647";
 	char *min = "-2147483648";
@@ -24,4 +24,4 @@ int	main(void)
 	else
 		printf("Lezgo\n");
 	return (0);
-}
+} */
