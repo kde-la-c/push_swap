@@ -16,12 +16,6 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-typedef struct s_args
-{
-	int		argc;
-	char	**argv;
-}			t_args;
-
 typedef struct s_info
 {
 	unsigned int	nbargs;
