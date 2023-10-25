@@ -1,3 +1,3 @@
-# [submodule "libft"]
-# 	path = libft
-# 	url = git@github.com:kde-la-c/libft.git
+[submodule "libft"]
+ 	path = libft
+ 	url = git@github.com:kde-la-c/libft.git
