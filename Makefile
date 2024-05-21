@@ -28,7 +28,8 @@ SRC			= push_swap.c\
 OBJS		= $(SRC:%.c=%.o)
 INCLUDE		= push_swap.h
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		+= -fsanitize=address
 RM			= rm
 RFLAGS		= -rf
 
@@ -39,16 +40,8 @@ all:		$(NAME)
 
 $(NAME):	$(OBJS) $(INCLUDE) $(LIBNAME)
 			$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBNAME)
-			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
-
-l:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=leak -g3 $(OBJS) -o $(NAME) $(LIBNAME)
-			$(RM) $(RFLAGS) $(OBJS)
-			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
-
-m:			$(OBJS) $(INCLUDE) $(LIBNAME)
-			$(CC) $(CFLAGS) -fsanitize=address -g3 $(OBJS) -o $(NAME) $(LIBNAME)
-			$(RM) $(RFLAGS) $(OBJS)
+	$(RM) $(RFLAGS) $(OBJS)
+	@echo "\033[0;31m--- RELINK ---\033[0m"
 			@echo "\033[0;32m--- push_swap compiled successfully! ---\033[0m"
 
 debug:		$(NAME_DBG)
@@ -71,4 +64,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re debug l m
+.PHONY:		all clean fclean re debug
